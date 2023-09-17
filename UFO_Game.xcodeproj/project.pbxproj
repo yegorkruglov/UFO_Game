@@ -13,9 +13,12 @@
 		5DBF9FDE2AB710750095CA4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDC2AB710750095CA4A /* Main.storyboard */; };
 		5DBF9FE02AB710760095CA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDF2AB710760095CA4A /* Assets.xcassets */; };
 		5DBF9FE32AB710760095CA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */; };
+		6B1E950F8BCDF64686372748 /* Pods_UFO_Game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22302B9DBE55CC89996C3DC0 /* Pods-UFO_Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFO_Game.release.xcconfig"; path = "Target Support Files/Pods-UFO_Game/Pods-UFO_Game.release.xcconfig"; sourceTree = "<group>"; };
+		2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UFO_Game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBF9FD32AB710750095CA4A /* UFO_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UFO_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBF9FD62AB710750095CA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		5DBF9FDF2AB710760095CA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DBF9FE22AB710760095CA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBF9FE42AB710760095CA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA35BBBAE6604D9C73E1CEFA /* Pods-UFO_Game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFO_Game.debug.xcconfig"; path = "Target Support Files/Pods-UFO_Game/Pods-UFO_Game.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B1E950F8BCDF64686372748 /* Pods_UFO_Game.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		375E514B92D60EBD7A728A2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5DBF9FCA2AB710750095CA4A = {
 			isa = PBXGroup;
 			children = (
 				5DBF9FD52AB710750095CA4A /* UFO_Game */,
 				5DBF9FD42AB710750095CA4A /* Products */,
+				DA184248946825396F132968 /* Pods */,
+				375E514B92D60EBD7A728A2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,16 @@
 			path = UFO_Game;
 			sourceTree = "<group>";
 		};
+		DA184248946825396F132968 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA35BBBAE6604D9C73E1CEFA /* Pods-UFO_Game.debug.xcconfig */,
+				22302B9DBE55CC89996C3DC0 /* Pods-UFO_Game.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DBF9FE72AB710760095CA4A /* Build configuration list for PBXNativeTarget "UFO_Game" */;
 			buildPhases = (
+				B5F94BE355EA4F00721F4E9C /* [CP] Check Pods Manifest.lock */,
 				5DBF9FCF2AB710750095CA4A /* Sources */,
 				5DBF9FD02AB710750095CA4A /* Frameworks */,
 				5DBF9FD12AB710750095CA4A /* Resources */,
+				440D166E19497A1BAD8ECFE5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		440D166E19497A1BAD8ECFE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5F94BE355EA4F00721F4E9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UFO_Game-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5DBF9FCF2AB710750095CA4A /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		5DBF9FE82AB710760095CA4A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA35BBBAE6604D9C73E1CEFA /* Pods-UFO_Game.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +380,7 @@
 		};
 		5DBF9FE92AB710760095CA4A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22302B9DBE55CC89996C3DC0 /* Pods-UFO_Game.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
