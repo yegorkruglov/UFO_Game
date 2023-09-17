@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     lazy var planeView = {
         let plane = UIView()
@@ -39,15 +39,26 @@ class ViewController: UIViewController {
         button.backgroundColor = .green
         button.setImage(UIImage(systemName: "arrowshape.right.fill"), for: .normal)
         button.addTarget(self, action: #selector(moveRight), for: .touchUpInside)
-
+        
         return button
     }()
-        
+    
     private var displayLink: CADisplayLink?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        startEnemiesSpawn()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        planeView.translatesAutoresizingMaskIntoConstraints = true
+    }
+    
+    private func setupUI() {
         view.backgroundColor = .lightGray
         view.addSubview(stackView)
         stackView.addArrangedSubview(leftButton)
@@ -68,12 +79,9 @@ class ViewController: UIViewController {
             make.height.equalTo(100)
             make.width.equalTo(100)
         }
-        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    private func startEnemiesSpawn() {
         Timer.scheduledTimer(
             timeInterval: 2.0,
             target: self,
@@ -85,7 +93,7 @@ class ViewController: UIViewController {
     
     @objc private func generateEnemy() {
         let minX = view.frame.width / 8
-        let maxX = view.frame.width - 20
+        let maxX = view.frame.width - minX
         
         let enemyView = UIView(
             frame: CGRect(x: CGFloat.random(in: minX...maxX),
@@ -94,44 +102,43 @@ class ViewController: UIViewController {
                           height: 100)
         )
         enemyView.backgroundColor = .red
+        
         DispatchQueue.main.async {
             self.view.addSubview(enemyView)
-            UIView.animate(withDuration: 5, animations: { enemyView.frame.origin.y += 1000 }) { _ in
-                enemyView.removeFromSuperview()
-
-            }
+            UIView.animate(
+                withDuration: 5,
+                delay: 0,
+                options: .curveLinear,
+                animations: { enemyView.frame.origin.y += 1000 }) { _ in
+                    enemyView.removeFromSuperview()
+                }
         }
-        
-        
         
         displayLink = CADisplayLink(target: self, selector: #selector(checkForIntersection))
         displayLink?.add(to: .main, forMode: .common)
-
     }
     
-    @objc func checkForIntersection() {
-        
-        guard let view1Frame = planeView.layer.presentation()?.frame else { return }
+    @objc private func checkForIntersection() {
+        guard let planeFrame = planeView.layer.presentation()?.frame else { return }
         self.view.subviews.forEach { subview in
-            guard subview.backgroundColor == .red, let view2Frame = subview.layer.presentation()?.frame else { return }
+            guard
+                subview.backgroundColor == .red,
+                let enemyFrame = subview.layer.presentation()?.frame
+            else { return }
             
-            if view1Frame.intersects(view2Frame) {
+            if planeFrame.intersects(enemyFrame) {
                 displayLink?.invalidate()
                 displayLink = nil
                 subview.layer.removeAllAnimations()
             }
         }
-        
     }
-
     
     @objc private func moveLeft() {
         planeView.center.x -= 50
-        
     }
     
     @objc private func moveRight() {
         planeView.center.x += 50
     }
 }
-
