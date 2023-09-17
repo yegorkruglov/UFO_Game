@@ -43,6 +43,9 @@ final class ViewController: UIViewController {
         return button
     }()
     
+    var minX: CGFloat { view.frame.width / 8 }
+    var maxX: CGFloat { view.frame.width - minX }
+    
     private var displayLink: CADisplayLink?
     
     override func viewDidLoad() {
@@ -65,7 +68,6 @@ final class ViewController: UIViewController {
         stackView.addArrangedSubview(rightButton)
         view.addSubview(planeView)
         
-        
         stackView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(20)
             make.left.equalToSuperview().inset(20)
@@ -83,7 +85,7 @@ final class ViewController: UIViewController {
     
     private func startEnemiesSpawn() {
         Timer.scheduledTimer(
-            timeInterval: 2.0,
+            timeInterval: 1.0,
             target: self,
             selector: #selector(generateEnemy),
             userInfo: nil,
@@ -92,9 +94,6 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateEnemy() {
-        let minX = view.frame.width / 8
-        let maxX = view.frame.width - minX
-        
         let enemyView = UIView(
             frame: CGRect(x: CGFloat.random(in: minX...maxX),
                           y: -100,
@@ -103,10 +102,10 @@ final class ViewController: UIViewController {
         )
         enemyView.backgroundColor = .red
         
-        DispatchQueue.main.async {
-            self.view.addSubview(enemyView)
+        DispatchQueue.main.async { [unowned self] in
+            self.view.insertSubview(enemyView, belowSubview: stackView)
             UIView.animate(
-                withDuration: 5,
+                withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
                 animations: { enemyView.frame.origin.y += 1000 }) { _ in
@@ -135,10 +134,16 @@ final class ViewController: UIViewController {
     }
     
     @objc private func moveLeft() {
-        planeView.center.x -= 50
+        if planeView.center.x > 20 {
+            planeView.center.x -= 50
+        }
+        
     }
     
     @objc private func moveRight() {
-        planeView.center.x += 50
+        if view.frame.maxX - planeView.center.x > 20 {
+            planeView.center.x += 50
+        }
+        
     }
 }
