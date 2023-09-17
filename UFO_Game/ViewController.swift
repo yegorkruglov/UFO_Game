@@ -45,6 +45,7 @@ final class ViewController: UIViewController {
     
     var minX: CGFloat { view.frame.width / 8 }
     var maxX: CGFloat { view.frame.width - minX }
+    var timer: Timer?
     
     private var displayLink: CADisplayLink?
     
@@ -84,7 +85,7 @@ final class ViewController: UIViewController {
     }
     
     private func startEnemiesSpawn() {
-        Timer.scheduledTimer(
+        timer = Timer.scheduledTimer(
             timeInterval: 1.0,
             target: self,
             selector: #selector(generateEnemy),
@@ -95,11 +96,12 @@ final class ViewController: UIViewController {
     
     @objc private func generateEnemy() {
         let enemyView = UIView(
-            frame: CGRect(x: CGFloat.random(in: minX...maxX),
+            frame: CGRect(x: 0,
                           y: -100,
                           width: 100,
                           height: 100)
         )
+        enemyView.center.x = Double.random(in: minX...maxX)
         enemyView.backgroundColor = .red
         
         DispatchQueue.main.async { [unowned self] in
@@ -129,6 +131,9 @@ final class ViewController: UIViewController {
                 displayLink?.invalidate()
                 displayLink = nil
                 subview.layer.removeAllAnimations()
+                timer?.invalidate()
+                
+                #warning("complete game over alert")
             }
         }
     }
