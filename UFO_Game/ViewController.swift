@@ -43,6 +43,15 @@ final class ViewController: UIViewController {
         return button
     }()
     
+    lazy var fireButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .orange
+        button.setTitle("FIRE", for: .normal)
+        button.addTarget(self, action: #selector(fire), for: .touchUpInside)
+        
+        return button
+    }()
+    
     var minX: CGFloat { view.frame.width / 8 }
     var maxX: CGFloat { view.frame.width - minX }
     var timer: Timer?
@@ -66,6 +75,7 @@ final class ViewController: UIViewController {
         view.backgroundColor = .lightGray
         view.addSubview(stackView)
         stackView.addArrangedSubview(leftButton)
+        stackView.addArrangedSubview(fireButton)
         stackView.addArrangedSubview(rightButton)
         view.addSubview(planeView)
         
@@ -136,6 +146,26 @@ final class ViewController: UIViewController {
                 #warning("complete game over alert")
             }
         }
+    }
+    
+    @objc private func fire() {
+        let fireball = UIView(frame: .init(origin: planeView.center, size: CGSize(width: 20, height: 20)))
+        fireball.center = planeView.center
+        fireball.backgroundColor = .black
+        
+        DispatchQueue.main.async { [unowned self] in
+            view.insertSubview(fireball, belowSubview: planeView)
+            UIView.animate(
+                withDuration: 3,
+                delay: 0,
+                options: .curveLinear,
+                animations: { fireball.frame.origin.y -= 1000 }) { _ in
+                    fireball.removeFromSuperview()
+                }
+        }
+        
+        
+        
     }
     
     @objc private func moveLeft() {
