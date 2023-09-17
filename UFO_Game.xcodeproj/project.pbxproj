@@ -10,7 +10,6 @@
 		5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FD62AB710750095CA4A /* AppDelegate.swift */; };
 		5DBF9FD92AB710750095CA4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */; };
 		5DBF9FDB2AB710750095CA4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDA2AB710750095CA4A /* ViewController.swift */; };
-		5DBF9FDE2AB710750095CA4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDC2AB710750095CA4A /* Main.storyboard */; };
 		5DBF9FE02AB710760095CA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDF2AB710760095CA4A /* Assets.xcassets */; };
 		5DBF9FE32AB710760095CA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */; };
 		6B1E950F8BCDF64686372748 /* Pods_UFO_Game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */; };
@@ -23,7 +22,6 @@
 		5DBF9FD62AB710750095CA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5DBF9FDA2AB710750095CA4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5DBF9FDD2AB710750095CA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DBF9FDF2AB710760095CA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DBF9FE22AB710760095CA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBF9FE42AB710760095CA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				5DBF9FD62AB710750095CA4A /* AppDelegate.swift */,
 				5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */,
 				5DBF9FDA2AB710750095CA4A /* ViewController.swift */,
-				5DBF9FDC2AB710750095CA4A /* Main.storyboard */,
 				5DBF9FDF2AB710760095CA4A /* Assets.xcassets */,
 				5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */,
 				5DBF9FE42AB710760095CA4A /* Info.plist */,
@@ -88,7 +85,6 @@
 				DA35BBBAE6604D9C73E1CEFA /* Pods-UFO_Game.debug.xcconfig */,
 				22302B9DBE55CC89996C3DC0 /* Pods-UFO_Game.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -154,7 +150,6 @@
 			files = (
 				5DBF9FE32AB710760095CA4A /* LaunchScreen.storyboard in Resources */,
 				5DBF9FE02AB710760095CA4A /* Assets.xcassets in Resources */,
-				5DBF9FDE2AB710750095CA4A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5DBF9FDC2AB710750095CA4A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5DBF9FDD2AB710750095CA4A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -362,7 +349,6 @@
 				INFOPLIST_FILE = UFO_Game/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,7 +377,6 @@
 				INFOPLIST_FILE = UFO_Game/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
