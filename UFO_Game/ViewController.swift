@@ -42,8 +42,8 @@ class ViewController: UIViewController {
 
         return button
     }()
-    
-    private var isCollided = false
+        
+    private var displayLink: CADisplayLink?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,24 +96,42 @@ class ViewController: UIViewController {
         enemyView.backgroundColor = .red
         DispatchQueue.main.async {
             self.view.addSubview(enemyView)
+            UIView.animate(withDuration: 5, animations: { enemyView.frame.origin.y += 1000 }) { _ in
+                enemyView.removeFromSuperview()
+
+            }
         }
         
-        UIView.animate(withDuration: 5, animations: { enemyView.frame.origin.y += 1000 }) { _ in
-            enemyView.removeFromSuperview()
+        
+        
+        displayLink = CADisplayLink(target: self, selector: #selector(checkForIntersection))
+        displayLink?.add(to: .main, forMode: .common)
 
-        }
     }
     
+    @objc func checkForIntersection() {
+        
+        guard let view1Frame = planeView.layer.presentation()?.frame else { return }
+        self.view.subviews.forEach { subview in
+            guard subview.backgroundColor == .red, let view2Frame = subview.layer.presentation()?.frame else { return }
+            
+            if view1Frame.intersects(view2Frame) {
+                displayLink?.invalidate()
+                displayLink = nil
+                subview.layer.removeAllAnimations()
+            }
+        }
+        
+    }
+
+    
     @objc private func moveLeft() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.planeView.frame.origin.x -= 50
-        })
+        planeView.center.x -= 50
+        
     }
     
     @objc private func moveRight() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.planeView.frame.origin.x += 50
-        })
+        planeView.center.x += 50
     }
 }
 
