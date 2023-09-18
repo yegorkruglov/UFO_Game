@@ -51,23 +51,28 @@ final class ViewController: UIViewController {
         return button
     }()
     
-    var minX: CGFloat { view.frame.width / 8 }
-    var maxX: CGFloat { view.frame.width - minX }
-    var timer: Timer?
-    
+    private var minX: CGFloat { view.frame.width / 8 }
+    private var maxX: CGFloat { view.frame.width - minX }
+    private var timer: Timer?
     private var displayLink: CADisplayLink?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        startEnemiesSpawn()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         planeView.translatesAutoresizingMaskIntoConstraints = true
+        startEnemiesSpawn()
+        startCollisionTracking()
+    }
+    
+    private func startCollisionTracking() {
+        displayLink = CADisplayLink(target: self, selector: #selector(checkForCollisions))
+        displayLink?.add(to: .main, forMode: .common)
     }
     
     private func setupUI() {
@@ -80,8 +85,8 @@ final class ViewController: UIViewController {
         
         stackView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(20)
-            make.left.equalToSuperview().inset(20)
-            make.right.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(20)
             make.height.equalTo(80)
         }
         
@@ -123,25 +128,55 @@ final class ViewController: UIViewController {
                     enemyView.removeFromSuperview()
                 }
         }
-//        displayLink = CADisplayLink(target: self, selector: #selector(checkForIntersection))
-//        displayLink?.add(to: .main, forMode: .common)
     }
     
-    @objc private func checkForIntersection() {
+    private func stopGame() {
+        displayLink?.invalidate()
+        displayLink = nil
+        timer?.invalidate()
+        timer = nil
+        view.subviews.forEach { subview in
+            subview.layer.removeAllAnimations()
+        }
+    }
+    
+    @objc private func checkForCollisions() {
         guard let planeFrame = planeView.layer.presentation()?.frame else { return }
-        self.view.subviews.forEach { subview in
-            guard
-                subview.backgroundColor == .red,
-                let enemyFrame = subview.layer.presentation()?.frame
-            else { return }
-            
-            if planeFrame.intersects(enemyFrame) {
-                displayLink?.invalidate()
-                displayLink = nil
-                subview.layer.removeAllAnimations()
-                timer?.invalidate()
+        var enemies: [EnemyView] = []
+        var bullets: [BulletView] = []
+        
+        view.subviews.forEach { subview in
+            if subview is EnemyView {
+                enemies.append(subview as! EnemyView)
+            } else if subview is BulletView {
+                bullets.append(subview as! BulletView)
+            }
+        }
+        
+        if enemies.count != 0 {
+            enemies.forEach { enemy in
+                guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
                 
-                #warning("complete game over alert")
+                if planeFrame.intersects(enemyFrame) {
+                    stopGame()
+                    print("game over")
+                }
+            }
+        }
+        
+        if bullets.count != 0 {
+            bullets.forEach { bullet in
+                guard let bulletFrame = bullet.layer.presentation()?.frame else { return }
+                
+                enemies.forEach { enemy in
+                    guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
+                    
+                    if enemyFrame.intersects(bulletFrame) {
+                        print("enemy terminated")
+                        enemy.removeFromSuperview()
+                        bullet.removeFromSuperview()
+                    }
+                }
             }
         }
     }
@@ -170,13 +205,11 @@ final class ViewController: UIViewController {
         if planeView.center.x > 20 {
             planeView.center.x -= 50
         }
-        
     }
     
     @objc private func moveRight() {
         if view.frame.maxX - planeView.center.x > 20 {
             planeView.center.x += 50
         }
-        
     }
 }
