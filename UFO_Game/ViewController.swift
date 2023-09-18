@@ -11,7 +11,7 @@ import SnapKit
 final class ViewController: UIViewController {
     
     lazy var planeView = {
-        let plane = UIView()
+        let plane = PlaneView()
         plane.backgroundColor = .blue
         
         return plane
@@ -42,7 +42,6 @@ final class ViewController: UIViewController {
         
         return button
     }()
-    
     lazy var fireButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
@@ -105,7 +104,7 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateEnemy() {
-        let enemyView = UIView(
+        let enemyView = EnemyView(
             frame: CGRect(x: 0,
                           y: -100,
                           width: 100,
@@ -124,9 +123,8 @@ final class ViewController: UIViewController {
                     enemyView.removeFromSuperview()
                 }
         }
-        
-        displayLink = CADisplayLink(target: self, selector: #selector(checkForIntersection))
-        displayLink?.add(to: .main, forMode: .common)
+//        displayLink = CADisplayLink(target: self, selector: #selector(checkForIntersection))
+//        displayLink?.add(to: .main, forMode: .common)
     }
     
     @objc private func checkForIntersection() {
@@ -149,23 +147,23 @@ final class ViewController: UIViewController {
     }
     
     @objc private func fire() {
-        let fireball = UIView(frame: .init(origin: planeView.center, size: CGSize(width: 20, height: 20)))
-        fireball.center = planeView.center
-        fireball.backgroundColor = .black
+        let bullet = BulletView(
+            frame: .init(origin: planeView.center,
+                         size: CGSize(width: 20, height: 20))
+        )
+        bullet.center = planeView.center
+        bullet.backgroundColor = .black
         
         DispatchQueue.main.async { [unowned self] in
-            view.insertSubview(fireball, belowSubview: planeView)
+            view.insertSubview(bullet, belowSubview: planeView)
             UIView.animate(
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { fireball.frame.origin.y -= 1000 }) { _ in
-                    fireball.removeFromSuperview()
+                animations: { bullet.frame.origin.y -= 1000 }) { _ in
+                    bullet.removeFromSuperview()
                 }
         }
-        
-        
-        
     }
     
     @objc private func moveLeft() {
