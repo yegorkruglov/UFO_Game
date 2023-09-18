@@ -55,6 +55,7 @@ final class ViewController: UIViewController {
     private var maxX: CGFloat { view.frame.width - minX }
     private var timer: Timer?
     private var displayLink: CADisplayLink?
+    private var isGameFailed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,18 +125,25 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { enemyView.frame.origin.y += 1000 }) { _ in
-                    enemyView.removeFromSuperview()
+                animations: { enemyView.frame.origin.y += 1000 }) { [unowned self] _ in
+                    if !isGameFailed {
+                        enemyView.removeFromSuperview()
+                    }
                 }
         }
     }
     
     private func stopGame() {
+        isGameFailed = true
         displayLink?.invalidate()
         displayLink = nil
         timer?.invalidate()
         timer = nil
+        UIView.setAnimationsEnabled(false)
         view.subviews.forEach { subview in
+            if let presentationLayer = subview.layer.presentation() {
+                subview.frame = presentationLayer.frame
+            }
             subview.layer.removeAllAnimations()
         }
     }
@@ -195,8 +203,10 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { bullet.frame.origin.y -= 1000 }) { _ in
-                    bullet.removeFromSuperview()
+                animations: { bullet.frame.origin.y -= 1000 }) { [unowned self] _ in
+                    if !isGameFailed {
+                        bullet.removeFromSuperview()
+                    }
                 }
         }
     }
