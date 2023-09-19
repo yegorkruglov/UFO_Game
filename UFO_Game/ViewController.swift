@@ -187,7 +187,7 @@ final class ViewController: UIViewController {
             enemies.forEach { enemy in
                 guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
                 
-                if planeFrame.intersects(enemyFrame) {
+                if objectFramesDidIntersected(planeFrame, and: enemyFrame) {
                     stopGame()
                     print("game over")
                 }
@@ -201,7 +201,7 @@ final class ViewController: UIViewController {
                 enemies.forEach { enemy in
                     guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
                     
-                    if enemyFrame.intersects(bulletFrame) {
+                    if objectFramesDidIntersected(enemyFrame, and: bulletFrame) {
                         print("enemy terminated")
                         enemy.removeFromSuperview()
                         bullet.removeFromSuperview()
@@ -209,6 +209,13 @@ final class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
+        firstObjectFrame.intersects(secondObjectFrame)
+            && (firstObjectFrame.midY - secondObjectFrame.midY) < (objectHeight / 3)
+            && (firstObjectFrame.midX - secondObjectFrame.midX) < (objectHeight / 3)
+        
     }
     
     @objc private func fire() {
