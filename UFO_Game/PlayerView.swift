@@ -1,21 +1,21 @@
 //
-//  EnemyView.swift
+//  PlaneView.swift
 //  UFO_Game
 //
 //  Created by Egor Kruglov on 18.09.2023.
 //
 
 import UIKit
-import SnapKit
 
-class EnemyView: UIView {
+class PlayerView: UIView {
+    
     lazy var imageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ufo")
+        imageView.image = UIImage(named: "fighter")
         
         return imageView
     }()
-        
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -34,6 +34,6 @@ class EnemyView: UIView {
     }
     
     deinit {
-        print("enemy was released")
+        print("player was released")
     }
 }

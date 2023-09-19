@@ -11,8 +11,7 @@ import SnapKit
 final class ViewController: UIViewController {
     
     private lazy var planeView = {
-        let plane = PlaneView()
-        plane.backgroundColor = .blue
+        let plane = GameObject(frame: .zero, objectType: .player, imageName: "fighter")
         
         return plane
     }()
@@ -29,6 +28,7 @@ final class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.backgroundColor = .green
         button.setImage(UIImage(systemName: "arrowshape.left.fill"), for: .normal)
+        button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(moveLeft), for: .touchUpInside)
         
         return button
@@ -37,6 +37,7 @@ final class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.backgroundColor = .green
         button.setImage(UIImage(systemName: "arrowshape.right.fill"), for: .normal)
+        button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(moveRight), for: .touchUpInside)
         
         return button
@@ -46,6 +47,7 @@ final class ViewController: UIViewController {
         button.backgroundColor = .orange
         button.setTitle("FIRE", for: .normal)
         button.addTarget(self, action: #selector(fire), for: .touchUpInside)
+        button.layer.cornerRadius = 20
         
         return button
     }()
@@ -122,14 +124,14 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateEnemy() {
-        let enemyView = EnemyView(
-            frame: CGRect(x: 0,
-                          y: -objectHeight,
-                          width: objectHeight,
-                          height: objectHeight)
-        )
+        let enemyView = GameObject(frame: CGRect(x: 0,
+                                                 y: -objectHeight,
+                                                 width: objectHeight,
+                                                 height: objectHeight),
+                                   objectType: .enemy, 
+                                   imageName: "ufo")
+            
         enemyView.center.x = Double.random(in: minX...maxX)
-        enemyView.backgroundColor = .red
         
         DispatchQueue.main.async { [unowned self] in
             self.view.insertSubview(enemyView, belowSubview: stackView)
@@ -202,12 +204,14 @@ final class ViewController: UIViewController {
     }
     
     @objc private func fire() {
-        let bullet = BulletView(
-            frame: .init(origin: planeView.center,
-                         size: CGSize(width: bulletHeight, height: bulletHeight))
-        )
+        let bullet = GameObject(frame: .init(origin: planeView.center,
+                                             size: CGSize(width: bulletHeight, 
+                                                          height: bulletHeight)
+                                            ),
+                                objectType: .bullet, 
+                                imageName: "missile")
+        
         bullet.center = planeView.center
-        bullet.backgroundColor = .black
         
         DispatchQueue.main.async { [unowned self] in
             view.insertSubview(bullet, belowSubview: planeView)
