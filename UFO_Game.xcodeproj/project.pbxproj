@@ -13,6 +13,8 @@
 		5DBF9FE02AB710760095CA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDF2AB710760095CA4A /* Assets.xcassets */; };
 		5DBF9FE32AB710760095CA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */; };
 		5DF33D282AB9B13400257A20 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D272AB9B13400257A20 /* GameObject.swift */; };
+		5DF33D2A2AB9E03700257A20 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D292AB9E03700257A20 /* Icons.swift */; };
+		5DF33D2C2AB9E20300257A20 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D2B2AB9E20300257A20 /* Difficulty.swift */; };
 		6B1E950F8BCDF64686372748 /* Pods_UFO_Game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		5DBF9FE22AB710760095CA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBF9FE42AB710760095CA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF33D272AB9B13400257A20 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		5DF33D292AB9E03700257A20 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
+		5DF33D2B2AB9E20300257A20 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		DA35BBBAE6604D9C73E1CEFA /* Pods-UFO_Game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFO_Game.debug.xcconfig"; path = "Target Support Files/Pods-UFO_Game/Pods-UFO_Game.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +78,9 @@
 				5DBF9FD62AB710750095CA4A /* AppDelegate.swift */,
 				5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */,
 				5DBF9FDA2AB710750095CA4A /* ViewController.swift */,
+				5DF33D2B2AB9E20300257A20 /* Difficulty.swift */,
 				5DF33D272AB9B13400257A20 /* GameObject.swift */,
+				5DF33D292AB9E03700257A20 /* Icons.swift */,
 				5DBF9FDF2AB710760095CA4A /* Assets.xcassets */,
 				5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */,
 				5DBF9FE42AB710760095CA4A /* Info.plist */,
@@ -207,7 +213,9 @@
 			files = (
 				5DF33D282AB9B13400257A20 /* GameObject.swift in Sources */,
 				5DBF9FDB2AB710750095CA4A /* ViewController.swift in Sources */,
+				5DF33D2C2AB9E20300257A20 /* Difficulty.swift in Sources */,
 				5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */,
+				5DF33D2A2AB9E03700257A20 /* Icons.swift in Sources */,
 				5DBF9FD92AB710750095CA4A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

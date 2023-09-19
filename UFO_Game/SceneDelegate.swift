@@ -15,7 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
+        let gameVC = ViewController()
+        gameVC.difficulty = .extreme
+        gameVC.selectedBullet = .bullet3
+        gameVC.selectedEnemy = .enemy2
+        gameVC.selectedPlayer = .player2
+        window?.rootViewController = gameVC
         window?.makeKeyAndVisible()
 
     }

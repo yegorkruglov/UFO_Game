@@ -10,8 +10,17 @@ import SnapKit
 
 final class ViewController: UIViewController {
     
+    var selectedPlayer: Icons.Player!
+    var selectedBullet: Icons.Bullet!
+    var selectedEnemy: Icons.Enemy!
+    var difficulty: Difficulty!
+    
     private lazy var planeView = {
-        let plane = GameObject(frame: .zero, objectType: .player, imageName: "player1")
+        let plane = GameObject(
+            frame: .zero,
+            objectType: .player,
+            imageName: selectedPlayer.rawValue
+        )
         
         return plane
     }()
@@ -59,10 +68,10 @@ final class ViewController: UIViewController {
     private var bulletHeight: CGFloat { screenWidth / 15 }
     private var objectRunDistance: CGFloat { screenHeight + objectHeight * 2 }
     private var moveStep: CGFloat { screenWidth / 10 }
-    private var generalInset: Double = 20
-    
+    private var generalInset: CGFloat = 20
     private var minX: CGFloat { view.frame.width / 8 }
     private var maxX: CGFloat { view.frame.width - minX }
+    
     private var timer: Timer?
     private var displayLink: CADisplayLink?
     private var isGameFailed = false
@@ -115,7 +124,7 @@ final class ViewController: UIViewController {
     
     private func startEnemiesSpawn() {
         timer = Timer.scheduledTimer(
-            timeInterval: 1.0,
+            timeInterval: 1.0 / difficulty.rawValue,
             target: self,
             selector: #selector(generateEnemy),
             userInfo: nil,
@@ -131,7 +140,7 @@ final class ViewController: UIViewController {
                 width: objectHeight,
                 height: objectHeight),
             objectType: .enemy,
-            imageName: "enemy1"
+            imageName: selectedEnemy.rawValue
         )
         
         enemyView.center.x = Double.random(in: minX...maxX)
@@ -139,7 +148,7 @@ final class ViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             self.view.insertSubview(enemyView, belowSubview: stackView)
             UIView.animate(
-                withDuration: 3,
+                withDuration: 4 / difficulty.rawValue,
                 delay: 0,
                 options: .curveLinear,
                 animations: { [unowned self] in
@@ -228,7 +237,7 @@ final class ViewController: UIViewController {
                 )
             ),
             objectType: .bullet,
-            imageName: "bullet1"
+            imageName: selectedBullet.rawValue
         )
         
         bullet.center = planeView.center
