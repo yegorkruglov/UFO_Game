@@ -10,23 +10,22 @@ import SnapKit
 
 final class ViewController: UIViewController {
     
-    lazy var planeView = {
+    private lazy var planeView = {
         let plane = PlaneView()
         plane.backgroundColor = .blue
         
         return plane
     }()
-    lazy var stackView = {
+    private lazy var stackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 10
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.backgroundColor = .black
         
         return stack
     }()
-    lazy var leftButton = {
+    private lazy var leftButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .green
         button.setImage(UIImage(systemName: "arrowshape.left.fill"), for: .normal)
@@ -34,7 +33,7 @@ final class ViewController: UIViewController {
         
         return button
     }()
-    lazy var rightButton = {
+    private lazy var rightButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .green
         button.setImage(UIImage(systemName: "arrowshape.right.fill"), for: .normal)
@@ -42,7 +41,7 @@ final class ViewController: UIViewController {
         
         return button
     }()
-    lazy var fireButton = {
+    private lazy var fireButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
         button.setTitle("FIRE", for: .normal)
@@ -50,6 +49,15 @@ final class ViewController: UIViewController {
         
         return button
     }()
+    
+    private var screenHeight: CGFloat { view.frame.height }
+    private var screenWidth: CGFloat { view.frame.width }
+    private var buttonHeight: CGFloat { screenHeight / 10 }
+    private var objectHeight: CGFloat { screenWidth / 6 }
+    private var bulletHeight: CGFloat { screenWidth / 20 }
+    private var objectRunDistance: CGFloat { screenHeight + objectHeight * 2 }
+    private var moveStep: CGFloat { screenWidth / 10 }
+    private var generalInset: Double = 20
     
     private var minX: CGFloat { view.frame.width / 8 }
     private var maxX: CGFloat { view.frame.width - minX }
@@ -71,6 +79,10 @@ final class ViewController: UIViewController {
         startCollisionTracking()
     }
     
+    deinit {
+        print("GameVC was realesed")
+    }
+    
     private func startCollisionTracking() {
         displayLink = CADisplayLink(target: self, selector: #selector(checkForCollisions))
         displayLink?.add(to: .main, forMode: .common)
@@ -85,17 +97,17 @@ final class ViewController: UIViewController {
         view.addSubview(planeView)
         
         stackView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(20)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(80)
+            make.bottom.equalToSuperview().inset(generalInset)
+            make.leading.equalToSuperview().inset(generalInset)
+            make.trailing.equalToSuperview().inset(generalInset)
+            make.height.equalTo(buttonHeight)
         }
         
         planeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(stackView.snp.top).inset(-20)
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.bottom.equalTo(stackView.snp.top).inset(-generalInset)
+            make.height.equalTo(objectHeight)
+            make.width.equalTo(objectHeight)
         }
     }
     
@@ -112,9 +124,9 @@ final class ViewController: UIViewController {
     @objc private func generateEnemy() {
         let enemyView = EnemyView(
             frame: CGRect(x: 0,
-                          y: -100,
-                          width: 100,
-                          height: 100)
+                          y: -objectHeight,
+                          width: objectHeight,
+                          height: objectHeight)
         )
         enemyView.center.x = Double.random(in: minX...maxX)
         enemyView.backgroundColor = .red
@@ -125,7 +137,7 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { enemyView.frame.origin.y += 1000 }) { [unowned self] _ in
+                animations: { [unowned self] in enemyView.frame.origin.y += objectRunDistance }) { [unowned self] _ in
                     if !isGameFailed {
                         enemyView.removeFromSuperview()
                     }
@@ -192,7 +204,7 @@ final class ViewController: UIViewController {
     @objc private func fire() {
         let bullet = BulletView(
             frame: .init(origin: planeView.center,
-                         size: CGSize(width: 20, height: 20))
+                         size: CGSize(width: bulletHeight, height: bulletHeight))
         )
         bullet.center = planeView.center
         bullet.backgroundColor = .black
@@ -203,7 +215,7 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { bullet.frame.origin.y -= 1000 }) { [unowned self] _ in
+                animations: { [unowned self] in bullet.frame.origin.y -= objectRunDistance }) { [unowned self] _ in
                     if !isGameFailed {
                         bullet.removeFromSuperview()
                     }
@@ -212,14 +224,14 @@ final class ViewController: UIViewController {
     }
     
     @objc private func moveLeft() {
-        if planeView.center.x > 20 {
-            planeView.center.x -= 50
+        if planeView.center.x > generalInset {
+            planeView.center.x -= moveStep
         }
     }
     
     @objc private func moveRight() {
-        if view.frame.maxX - planeView.center.x > 20 {
-            planeView.center.x += 50
+        if view.frame.maxX - planeView.center.x > generalInset {
+            planeView.center.x += moveStep
         }
     }
 }
