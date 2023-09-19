@@ -16,7 +16,7 @@ class GameObject: UIView {
         return imageView
     }()
     
-    private let objectType: GameObjectType
+    let objectType: GameObjectType
     private let imageName: String
     
     init(frame: CGRect, objectType: GameObjectType, imageName: String) {

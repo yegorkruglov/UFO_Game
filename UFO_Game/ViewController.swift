@@ -11,7 +11,7 @@ import SnapKit
 final class ViewController: UIViewController {
     
     private lazy var planeView = {
-        let plane = GameObject(frame: .zero, objectType: .player, imageName: "fighter")
+        let plane = GameObject(frame: .zero, objectType: .player, imageName: "player1")
         
         return plane
     }()
@@ -56,7 +56,7 @@ final class ViewController: UIViewController {
     private var screenWidth: CGFloat { view.frame.width }
     private var buttonHeight: CGFloat { screenHeight / 10 }
     private var objectHeight: CGFloat { screenWidth / 6 }
-    private var bulletHeight: CGFloat { screenWidth / 20 }
+    private var bulletHeight: CGFloat { screenWidth / 15 }
     private var objectRunDistance: CGFloat { screenHeight + objectHeight * 2 }
     private var moveStep: CGFloat { screenWidth / 10 }
     private var generalInset: Double = 20
@@ -124,13 +124,16 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateEnemy() {
-        let enemyView = GameObject(frame: CGRect(x: 0,
-                                                 y: -objectHeight,
-                                                 width: objectHeight,
-                                                 height: objectHeight),
-                                   objectType: .enemy, 
-                                   imageName: "ufo")
-            
+        let enemyView = GameObject(
+            frame: CGRect(
+                x: 0,
+                y: -objectHeight,
+                width: objectHeight,
+                height: objectHeight),
+            objectType: .enemy,
+            imageName: "enemy1"
+        )
+        
         enemyView.center.x = Double.random(in: minX...maxX)
         
         DispatchQueue.main.async { [unowned self] in
@@ -139,11 +142,15 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { [unowned self] in enemyView.frame.origin.y += objectRunDistance }) { [unowned self] _ in
+                animations: { [unowned self] in
+                    enemyView.frame.origin.y += objectRunDistance
+                },
+                completion: { [unowned self] _ in
                     if !isGameFailed {
                         enemyView.removeFromSuperview()
                     }
                 }
+            )
         }
     }
     
@@ -164,14 +171,15 @@ final class ViewController: UIViewController {
     
     @objc private func checkForCollisions() {
         guard let planeFrame = planeView.layer.presentation()?.frame else { return }
-        var enemies: [EnemyView] = []
-        var bullets: [BulletView] = []
+        var enemies: [GameObject] = []
+        var bullets: [GameObject] = []
         
         view.subviews.forEach { subview in
-            if subview is EnemyView {
-                enemies.append(subview as! EnemyView)
-            } else if subview is BulletView {
-                bullets.append(subview as! BulletView)
+            guard let subview = subview as? GameObject else { return }
+            if subview.objectType == .enemy {
+                enemies.append(subview)
+            } else if subview.objectType == .bullet {
+                bullets.append(subview)
             }
         }
         
@@ -204,12 +212,17 @@ final class ViewController: UIViewController {
     }
     
     @objc private func fire() {
-        let bullet = GameObject(frame: .init(origin: planeView.center,
-                                             size: CGSize(width: bulletHeight, 
-                                                          height: bulletHeight)
-                                            ),
-                                objectType: .bullet, 
-                                imageName: "missile")
+        let bullet = GameObject(
+            frame: .init(
+                origin: planeView.center,
+                size: CGSize(
+                    width: bulletHeight,
+                    height: bulletHeight
+                )
+            ),
+            objectType: .bullet,
+            imageName: "bullet1"
+        )
         
         bullet.center = planeView.center
         
@@ -219,11 +232,15 @@ final class ViewController: UIViewController {
                 withDuration: 3,
                 delay: 0,
                 options: .curveLinear,
-                animations: { [unowned self] in bullet.frame.origin.y -= objectRunDistance }) { [unowned self] _ in
+                animations: { [unowned self] in
+                    bullet.frame.origin.y -= objectRunDistance
+                },
+                completion: { [unowned self] _ in
                     if !isGameFailed {
                         bullet.removeFromSuperview()
                     }
                 }
+            )
         }
     }
     
