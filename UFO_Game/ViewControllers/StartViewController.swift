@@ -14,7 +14,7 @@ class StartViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillEqually
-        stack.spacing = 8
+        stack.spacing = stackInset
         
         return stack
     }()
@@ -41,6 +41,7 @@ class StartViewController: UIViewController {
     @objc private func openSettings() {
         let settingsVC = SettingsViewController()
         settingsVC.modalPresentationStyle = .fullScreen
+        settingsVC.modalTransitionStyle = .flipHorizontal
         present(settingsVC, animated: true)
     }
     
@@ -60,7 +61,7 @@ extension StartViewController {
         view.addSubview(stackView)
         
         stackView.snp.makeConstraints { make in
-            make.width.equalToSuperview().inset(16)
+            make.width.equalToSuperview().inset(insetFromScreenEdges)
             make.center.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3)
         }

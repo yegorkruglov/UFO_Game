@@ -39,7 +39,7 @@ class SettingsViewController: UIViewController {
     private lazy var stackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 10
+        stack.spacing = stackInset
         stack.alignment = .fill
         stack.distribution = .fillEqually
         
@@ -56,7 +56,13 @@ class SettingsViewController: UIViewController {
         
         return tf
     }()
-    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private var collectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+       cv.backgroundColor = .white
+       cv.layer.cornerRadius = 20
+       
+        return cv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,39 +84,46 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController {
     private func setupUI() {
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
-        collectionView.layer.cornerRadius = 20
-        collectionView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalToSuperview().inset(16)
-            make.height.equalToSuperview().dividedBy(2)
-        }
-        
+       
         view.addSubview(stackView)
         stackView.addArrangedSubview(saveButton)
         stackView.addArrangedSubview(dismissButton)
         stackView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(collectionView)
-            make.top.equalTo(collectionView.snp.bottom).inset(-20)
-            make.height.equalTo(view.frame.height / 10)
+            make.horizontalEdges.equalToSuperview().inset(insetFromScreenEdges)
+            make.bottom.equalToSuperview().inset(generalInset)
+            make.height.equalTo(buttonHeight)
+            make.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(80)
+            make.centerX.equalToSuperview()
+            make.horizontalEdges.equalTo(stackView)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
-            make.centerX.equalTo(collectionView)
-            make.width.equalTo(collectionView)
-            make.bottom.equalTo(collectionView.snp.top).inset(-20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(stackView)
+            make.top.equalTo(nameLabel.snp.bottom).offset(generalInset)
             make.height.equalToSuperview().dividedBy(16)
         }
-        nameTextField.layer.cornerRadius = 20
+        nameTextField.layer.cornerRadius = cornerRadius
         
-        view.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(collectionView)
-            make.width.equalTo(collectionView)
-            make.bottom.equalTo(nameTextField.snp.top).inset(-20)
-            make.height.equalToSuperview().dividedBy(16)
+        view.addSubview(iconsLabel)
+        iconsLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalTo(stackView)
+            make.top.equalTo(nameTextField.snp.bottom).offset(generalInset)
+        }
+
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalTo(stackView)
+            make.top.equalTo(iconsLabel.snp.bottom).offset(generalInset)
+            make.bottom.equalTo(stackView.snp.top).inset(-generalInset)
         }
     }
 }

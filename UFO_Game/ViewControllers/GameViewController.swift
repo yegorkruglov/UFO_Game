@@ -27,7 +27,7 @@ final class GameViewController: UIViewController {
     private lazy var stackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 10
+        stack.spacing = stackInset
         stack.alignment = .fill
         stack.distribution = .fillEqually
         
@@ -37,14 +37,10 @@ final class GameViewController: UIViewController {
     private lazy var rightButton = getGameButton(selector: #selector(moveRight), imageName: "arrowshape.right.fill")
     private lazy var fireButton = getGameButton(selector: #selector(fire), title: "FIRE")
     
-    private lazy var screenHeight: CGFloat = { view.frame.height }()
-    private lazy var screenWidth: CGFloat = { view.frame.width }()
-    private lazy var buttonHeight: CGFloat = { screenHeight / 10 }()
     private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
     private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
     private lazy var objectRunDistance: CGFloat = { screenHeight + objectHeight * 2 }()
     private lazy var moveStep: CGFloat = { screenWidth / 10 }()
-    private lazy var generalInset: CGFloat = 20
     private lazy var minX: CGFloat = { view.frame.width / 8 }()
     private lazy var maxX: CGFloat = { view.frame.width - minX }()
     
@@ -210,7 +206,8 @@ final class GameViewController: UIViewController {
             }
         }
     }
-    
+#warning("reconsider collision detection logic")
+
     private func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
         firstObjectFrame.intersects(secondObjectFrame)
             && (firstObjectFrame.midY - secondObjectFrame.midY) < (objectHeight / 3)
