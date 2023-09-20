@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ViewController: UIViewController {
+final class GameViewController: UIViewController {
     
     var selectedPlayer: Icons.Player!
     var selectedBullet: Icons.Bullet!
