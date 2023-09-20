@@ -18,8 +18,8 @@ extension UIViewController {
             button.setTitleColor(.black, for: .normal)
         }
         if let imageName = imageName {
-            button.setImage(UIImage(named: imageName), for: .normal)
-            button.imageView?.tintColor = .black
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+            button.tintColor = .black
         }
         
         return button

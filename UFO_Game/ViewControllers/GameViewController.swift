@@ -33,33 +33,9 @@ final class GameViewController: UIViewController {
         
         return stack
     }()
-    private lazy var leftButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .green
-        button.setImage(UIImage(systemName: "arrowshape.left.fill"), for: .normal)
-        button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(moveLeft), for: .touchUpInside)
-        
-        return button
-    }()
-    private lazy var rightButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .green
-        button.setImage(UIImage(systemName: "arrowshape.right.fill"), for: .normal)
-        button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(moveRight), for: .touchUpInside)
-        
-        return button
-    }()
-    private lazy var fireButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .orange
-        button.setTitle("FIRE", for: .normal)
-        button.addTarget(self, action: #selector(fire), for: .touchUpInside)
-        button.layer.cornerRadius = 20
-        
-        return button
-    }()
+    private lazy var leftButton = getGameButton(selector: #selector(moveLeft), imageName: "arrowshape.left.fill")
+    private lazy var rightButton = getGameButton(selector: #selector(moveRight), imageName: "arrowshape.right.fill")
+    private lazy var fireButton = getGameButton(selector: #selector(fire), title: "FIRE")
     
     private lazy var screenHeight: CGFloat = { view.frame.height }()
     private lazy var screenWidth: CGFloat = { view.frame.width }()
@@ -115,7 +91,7 @@ final class GameViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .black
         view.addSubview(stackView)
         stackView.addArrangedSubview(leftButton)
         stackView.addArrangedSubview(fireButton)
