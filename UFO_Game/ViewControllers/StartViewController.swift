@@ -28,11 +28,20 @@ class StartViewController: UIViewController {
     }
     
     @objc private func startGame() {
-        
+        let gameVC = GameViewController(
+            selectedPlayer: .player1,
+            selectedBullet: .bullet1,
+            selectedEnemy: .enemy1,
+            difficulty: .easy
+        )
+        gameVC.modalTransitionStyle = .crossDissolve
+        present(gameVC, animated: true)
     }
     
     @objc private func openSettings() {
-        
+        let settingsVC = SettingsViewController()
+        settingsVC.modalPresentationStyle = .fullScreen
+        present(settingsVC, animated: true)
     }
     
     @objc private func openLeaderBoard() {
