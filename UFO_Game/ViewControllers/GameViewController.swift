@@ -10,10 +10,10 @@ import SnapKit
 
 final class GameViewController: UIViewController {
     
-    var selectedPlayer: Icons.Player!
-    var selectedBullet: Icons.Bullet!
-    var selectedEnemy: Icons.Enemy!
-    var difficulty: Difficulty!
+    private var selectedPlayer: Icons.Player
+    private var selectedBullet: Icons.Bullet
+    private var selectedEnemy: Icons.Enemy
+    private var difficulty: Difficulty
     
     private lazy var planeView = {
         let plane = GameObject(
@@ -61,16 +61,16 @@ final class GameViewController: UIViewController {
         return button
     }()
     
-    private var screenHeight: CGFloat { view.frame.height }
-    private var screenWidth: CGFloat { view.frame.width }
-    private var buttonHeight: CGFloat { screenHeight / 10 }
-    private var objectHeight: CGFloat { screenWidth / 6 }
-    private var bulletHeight: CGFloat { screenWidth / 15 }
-    private var objectRunDistance: CGFloat { screenHeight + objectHeight * 2 }
-    private var moveStep: CGFloat { screenWidth / 10 }
-    private var generalInset: CGFloat = 20
-    private var minX: CGFloat { view.frame.width / 8 }
-    private var maxX: CGFloat { view.frame.width - minX }
+    private lazy var screenHeight: CGFloat = { view.frame.height }()
+    private lazy var screenWidth: CGFloat = { view.frame.width }()
+    private lazy var buttonHeight: CGFloat = { screenHeight / 10 }()
+    private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
+    private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
+    private lazy var objectRunDistance: CGFloat = { screenHeight + objectHeight * 2 }()
+    private lazy var moveStep: CGFloat = { screenWidth / 10 }()
+    private lazy var generalInset: CGFloat = 20
+    private lazy var minX: CGFloat = { view.frame.width / 8 }()
+    private lazy var maxX: CGFloat = { view.frame.width - minX }()
     
     private var timer: Timer?
     private var displayLink: CADisplayLink?
@@ -88,6 +88,21 @@ final class GameViewController: UIViewController {
         planeView.translatesAutoresizingMaskIntoConstraints = true
         startEnemiesSpawn()
         startCollisionTracking()
+    }
+    
+    init(selectedPlayer: Icons.Player, 
+         selectedBullet: Icons.Bullet,
+         selectedEnemy: Icons.Enemy,
+         difficulty: Difficulty) {
+        self.selectedPlayer = selectedPlayer
+        self.selectedBullet = selectedBullet
+        self.selectedEnemy = selectedEnemy
+        self.difficulty = difficulty
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {

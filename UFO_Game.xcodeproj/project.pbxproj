@@ -92,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				5DF33D292AB9E03700257A20 /* Icons.swift */,
+				5DF33D2B2AB9E20300257A20 /* Difficulty.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -119,7 +120,6 @@
 			children = (
 				5D310FFD2ABB1995001CEA54 /* Application */,
 				5D310FFA2ABB1930001CEA54 /* ViewControllers */,
-				5DF33D2B2AB9E20300257A20 /* Difficulty.swift */,
 				5D310FFB2ABB1941001CEA54 /* Views */,
 				5D310FFE2ABB19BD001CEA54 /* Resources */,
 				5D310FFC2ABB197C001CEA54 /* Supporting Files */,
