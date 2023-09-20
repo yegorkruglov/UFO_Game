@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Icons {
+enum Icons: CaseIterable {
     enum Player: String {
         case player1 = "player1"
         case player2 = "player2"

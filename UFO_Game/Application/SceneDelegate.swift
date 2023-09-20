@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let gameVC = GameViewController(selectedPlayer: .player1, selectedBullet: .bullet1, selectedEnemy: .enemy1, difficulty: .easy)
         let startVC = StartViewController()
-        window?.rootViewController = startVC
+        let settingsVC = SettingsViewController()
+        window?.rootViewController = settingsVC
         window?.makeKeyAndVisible()
 
     }

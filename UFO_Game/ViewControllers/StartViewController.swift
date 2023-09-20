@@ -19,8 +19,8 @@ class StartViewController: UIViewController {
         return stack
     }()
     private lazy var startButton = getGameButton(selector: #selector(startGame), title: "START")
-    private lazy var settingsButton = getGameButton(selector: #selector(startGame), title: "SETTINGS")
-    private lazy var leaderboardButton = getGameButton(selector: #selector(startGame), title: "LEADERBOARD")
+    private lazy var settingsButton = getGameButton(selector: #selector(openSettings), title: "SETTINGS")
+    private lazy var leaderboardButton = getGameButton(selector: #selector(openLeaderBoard), title: "LEADERBOARD")
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +28,14 @@ class StartViewController: UIViewController {
     }
     
     @objc private func startGame() {
+        
+    }
+    
+    @objc private func openSettings() {
+        
+    }
+    
+    @objc private func openLeaderBoard() {
         
     }
     
@@ -47,6 +55,5 @@ extension StartViewController {
             make.center.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3)
         }
-        
     }
 }
