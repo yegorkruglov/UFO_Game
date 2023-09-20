@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D3110002ABB1F7E001CEA54 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D310FFF2ABB1F7E001CEA54 /* StartViewController.swift */; };
+		5D3110022ABB24C2001CEA54 /* Extension +UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3110012ABB24C2001CEA54 /* Extension +UIViewController.swift */; };
 		5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FD62AB710750095CA4A /* AppDelegate.swift */; };
 		5DBF9FD92AB710750095CA4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */; };
 		5DBF9FDB2AB710750095CA4A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDA2AB710750095CA4A /* GameViewController.swift */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		22302B9DBE55CC89996C3DC0 /* Pods-UFO_Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UFO_Game.release.xcconfig"; path = "Target Support Files/Pods-UFO_Game/Pods-UFO_Game.release.xcconfig"; sourceTree = "<group>"; };
 		2FC2E18EAC3F06FEF569C5E1 /* Pods_UFO_Game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UFO_Game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D310FFF2ABB1F7E001CEA54 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		5D3110012ABB24C2001CEA54 /* Extension +UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension +UIViewController.swift"; sourceTree = "<group>"; };
 		5DBF9FD32AB710750095CA4A /* UFO_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UFO_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DBF9FD62AB710750095CA4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DBF9FD82AB710750095CA4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,7 @@
 		5D310FFA2ABB1930001CEA54 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5D310FFF2ABB1F7E001CEA54 /* StartViewController.swift */,
 				5DBF9FDA2AB710750095CA4A /* GameViewController.swift */,
 			);
 			path = ViewControllers;
@@ -97,6 +102,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		5D3110032ABB2CDC001CEA54 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5D3110012ABB24C2001CEA54 /* Extension +UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5DBF9FCA2AB710750095CA4A = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 				5D310FFD2ABB1995001CEA54 /* Application */,
 				5D310FFA2ABB1930001CEA54 /* ViewControllers */,
 				5D310FFB2ABB1941001CEA54 /* Views */,
+				5D3110032ABB2CDC001CEA54 /* Extensions */,
 				5D310FFE2ABB19BD001CEA54 /* Resources */,
 				5D310FFC2ABB197C001CEA54 /* Supporting Files */,
 				5DBF9FE42AB710760095CA4A /* Info.plist */,
@@ -252,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DF33D282AB9B13400257A20 /* GameObject.swift in Sources */,
+				5D3110022ABB24C2001CEA54 /* Extension +UIViewController.swift in Sources */,
+				5D3110002ABB1F7E001CEA54 /* StartViewController.swift in Sources */,
 				5DBF9FDB2AB710750095CA4A /* GameViewController.swift in Sources */,
 				5DF33D2C2AB9E20300257A20 /* Difficulty.swift in Sources */,
 				5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */,
