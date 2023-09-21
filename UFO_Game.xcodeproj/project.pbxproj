@@ -16,6 +16,7 @@
 		5DBF9FDB2AB710750095CA4A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDA2AB710750095CA4A /* GameViewController.swift */; };
 		5DBF9FE02AB710760095CA4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FDF2AB710760095CA4A /* Assets.xcassets */; };
 		5DBF9FE32AB710760095CA4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DBF9FE12AB710760095CA4A /* LaunchScreen.storyboard */; };
+		5DF056582ABC766500C0FC7A /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF056572ABC766500C0FC7A /* IconCollectionViewCell.swift */; };
 		5DF33D282AB9B13400257A20 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D272AB9B13400257A20 /* GameObject.swift */; };
 		5DF33D2A2AB9E03700257A20 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D292AB9E03700257A20 /* Icons.swift */; };
 		5DF33D2C2AB9E20300257A20 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF33D2B2AB9E20300257A20 /* Difficulty.swift */; };
@@ -36,6 +37,7 @@
 		5DBF9FDF2AB710760095CA4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DBF9FE22AB710760095CA4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DBF9FE42AB710760095CA4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DF056572ABC766500C0FC7A /* IconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DF33D272AB9B13400257A20 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		5DF33D292AB9E03700257A20 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		5DF33D2B2AB9E20300257A20 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				5DF33D272AB9B13400257A20 /* GameObject.swift */,
+				5DF056572ABC766500C0FC7A /* IconCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				5DF33D2A2AB9E03700257A20 /* Icons.swift in Sources */,
 				5DBF9FD92AB710750095CA4A /* SceneDelegate.swift in Sources */,
 				5D3110052ABB33C9001CEA54 /* SettingsViewController.swift in Sources */,
+				5DF056582ABC766500C0FC7A /* IconCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

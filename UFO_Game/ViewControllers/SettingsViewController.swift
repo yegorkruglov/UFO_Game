@@ -57,9 +57,9 @@ class SettingsViewController: UIViewController {
     }()
     private var collectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-       cv.backgroundColor = .white
-       cv.layer.cornerRadius = 20
-       
+        cv.backgroundColor = .white
+        cv.layer.cornerRadius = 20
+        
         return cv
     }()
     
@@ -68,6 +68,9 @@ class SettingsViewController: UIViewController {
         
         setupUI()
         nameTextField.delegate = self
+        collectionView.register(IconCollectionViewCell.self, forCellWithReuseIdentifier: IconCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     deinit{
@@ -135,4 +138,31 @@ extension SettingsViewController: UITextFieldDelegate {
         nameTextField.resignFirstResponder()
         return true
     }
+}
+
+extension SettingsViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        print("sec", Icons.allIconTypes.count)
+//        return Icons.allIconTypes.count
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        print("items", Icons.allIconTypes[section].count)
+//        return Icons.allIconTypes[section].count
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IconCollectionViewCell.identifier, for: indexPath) as? IconCollectionViewCell else { return UICollectionViewCell() }
+        let sectionIcons = Icons.allIconTypes[indexPath.section]
+        let iconName = sectionIcons[indexPath.item]
+        cell.configureUI(imageName: iconName)
+        
+        return cell
+    }
+}
+
+extension SettingsViewController: UICollectionViewDelegate {
+    
 }
