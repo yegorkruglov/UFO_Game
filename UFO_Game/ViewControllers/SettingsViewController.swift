@@ -9,7 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    private var userName: String?
+    private var selectedPlayerName: String?
     private var selectedPlayerIcon: Icons.Player?
     private var selectedEnemyIcon: Icons.Enemy?
     private var selectedBulletIcon: Icons.Bullet?
@@ -24,7 +24,6 @@ class SettingsViewController: UIViewController {
         
         return label
     }()
-    
     private lazy var iconsLabel = {
         let label = UILabel()
         label.text = "Choose fighter, enemies, missiles"
@@ -35,7 +34,6 @@ class SettingsViewController: UIViewController {
         
         return label
     }()
-    
     private lazy var stackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -47,12 +45,13 @@ class SettingsViewController: UIViewController {
     }()
     private lazy var saveButton = getGameButton(selector: #selector(saveSettings), title: "SAVE")
     private lazy var dismissButton = getGameButton(selector: #selector(dismissSettings), title: "CANCEL")
-    
     private lazy var nameTextField = {
         let tf = UITextField()
         tf.placeholder = "Player"
         tf.backgroundColor = .white
         tf.textAlignment = .center
+        tf.returnKeyType = .done
+        tf.clearsOnBeginEditing = true
         
         return tf
     }()
@@ -68,6 +67,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        nameTextField.delegate = self
     }
     
     deinit{
@@ -107,7 +107,7 @@ extension SettingsViewController {
             make.centerX.equalToSuperview()
             make.width.equalTo(stackView)
             make.top.equalTo(nameLabel.snp.bottom).offset(generalInset)
-            make.height.equalToSuperview().dividedBy(16)
+            make.height.equalTo(stackView).dividedBy(2)
         }
         nameTextField.layer.cornerRadius = cornerRadius
         
@@ -125,5 +125,14 @@ extension SettingsViewController {
             make.top.equalTo(iconsLabel.snp.bottom).offset(generalInset)
             make.bottom.equalTo(stackView.snp.top).inset(-generalInset)
         }
+    }
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let typedPlayerName = nameTextField.text, typedPlayerName != "" else { return false}
+        selectedPlayerName = typedPlayerName
+        nameTextField.resignFirstResponder()
+        return true
     }
 }

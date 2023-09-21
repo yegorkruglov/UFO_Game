@@ -15,7 +15,7 @@ extension UIViewController {
     var generalInset: CGFloat { 20 }
     var stackInset: CGFloat { 10 }
     var insetFromScreenEdges: CGFloat { 20 }
-    var cornerRadius: CGFloat { 20 }
+    var cornerRadius: CGFloat { buttonHeight / 4 }
     
     func getGameButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
         let button = UIButton(type: .roundedRect)
