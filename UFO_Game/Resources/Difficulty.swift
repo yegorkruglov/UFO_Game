@@ -7,8 +7,19 @@
 
 import Foundation
 
-enum Difficulty: Double {
+enum Difficulty: Double, CaseIterable {
     case easy = 0.5
     case normal = 1
     case extreme = 2
+    
+    var name: String {
+        switch self {
+        case .easy:
+            return "Easy"
+        case .normal:
+            return "Normal"
+        case .extreme:
+            return "Extreme"
+        }
+    }
 }
