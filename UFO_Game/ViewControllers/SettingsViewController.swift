@@ -59,33 +59,9 @@ class SettingsViewController: UIViewController {
         
         return tf
     }()
-    private lazy var playerSelectionSegment = {
-        let icons: [UIImage] = Icons.allPlayers.map {
-            UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
-        }
-        let seg = UISegmentedControl(items: icons)
-        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
-        
-        return seg
-    }()
-    private lazy var enemySelectionSegment = {
-        let icons: [UIImage] = Icons.allEnemies.map {
-            UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
-        }
-        let seg = UISegmentedControl(items: icons)
-        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
-        
-        return seg
-    }()
-    private lazy var bulletSelectionSegment = {
-        let icons: [UIImage] = Icons.allBullets.map {
-            UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
-        }
-        let seg = UISegmentedControl(items: icons)
-        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
-        
-        return seg
-    }()
+    private lazy var playerSelectionSegment = generateSegmentedControll(for: Icons.allPlayers)
+    private lazy var enemySelectionSegment = generateSegmentedControll(for: Icons.allEnemies)
+    private lazy var bulletSelectionSegment = generateSegmentedControll(for: Icons.allBullets)
     private lazy var difficultySelectionSegment = {
         let levels: [String] = Difficulty.allCases.map { $0.name }
         let seg = UISegmentedControl(items: levels)
@@ -94,6 +70,7 @@ class SettingsViewController: UIViewController {
         
         return seg
     }()
+    
     private lazy var segmentsStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -120,6 +97,16 @@ class SettingsViewController: UIViewController {
     
     deinit{
         print("SettingsVC was realesed")
+    }
+    
+    private func generateSegmentedControll(for type: [String]) -> UISegmentedControl {
+        let icons: [UIImage] = type.map {
+            UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
+        }
+        let seg = UISegmentedControl(items: icons)
+        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
+        
+        return seg
     }
     
     private func loadSettings() {
