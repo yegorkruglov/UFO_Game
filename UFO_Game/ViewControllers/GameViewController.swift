@@ -82,7 +82,6 @@ final class GameViewController: UIViewController {
         planeView.translatesAutoresizingMaskIntoConstraints = true
         startEnemiesSpawn()
         startCollisionTracking()
-        scoreLabel.layer.cornerRadius = cornerRadiusS
     }
     
     init(gameSettings: GameSettings) {
@@ -241,7 +240,7 @@ final class GameViewController: UIViewController {
         }
     }
 #warning("reconsider collision detection logic")
-
+    
     private func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
         firstObjectFrame.intersects(secondObjectFrame)
             && (firstObjectFrame.midY - secondObjectFrame.midY) < (objectHeight / 3)
@@ -250,46 +249,48 @@ final class GameViewController: UIViewController {
     }
     
     @objc private func fire() {
-        let bullet = GameObject(
-            frame: .init(
-                origin: planeView.center,
-                size: CGSize(
-                    width: bulletHeight,
-                    height: bulletHeight
-                )
-            ),
-            objectType: .bullet,
-            imageName: gameSettings.bulletIcon.rawValue
-        )
-        
-        bullet.center = planeView.center
-        
-        DispatchQueue.main.async { [unowned self] in
-            view.insertSubview(bullet, belowSubview: planeView)
-            UIView.animate(
-                withDuration: 3,
-                delay: 0,
-                options: .curveLinear,
-                animations: { [unowned self] in
-                    bullet.frame.origin.y -= objectRunDistance
-                },
-                completion: { [unowned self] _ in
-                    if !isGameFailed {
-                        bullet.removeFromSuperview()
-                    }
-                }
+        if !isGameFailed {
+            let bullet = GameObject(
+                frame: .init(
+                    origin: planeView.center,
+                    size: CGSize(
+                        width: bulletHeight,
+                        height: bulletHeight
+                    )
+                ),
+                objectType: .bullet,
+                imageName: gameSettings.bulletIcon.rawValue
             )
+            
+            bullet.center = planeView.center
+            
+            DispatchQueue.main.async { [unowned self] in
+                view.insertSubview(bullet, belowSubview: planeView)
+                UIView.animate(
+                    withDuration: 3,
+                    delay: 0,
+                    options: .curveLinear,
+                    animations: { [unowned self] in
+                        bullet.frame.origin.y -= objectRunDistance
+                    },
+                    completion: { [unowned self] _ in
+                        if !isGameFailed {
+                            bullet.removeFromSuperview()
+                        }
+                    }
+                )
+            }
         }
     }
     
     @objc private func moveLeft() {
-        if planeView.center.x > generalInset {
+        if planeView.center.x > generalInset && !isGameFailed{
             planeView.center.x -= moveStep
         }
     }
     
     @objc private func moveRight() {
-        if view.frame.maxX - planeView.center.x > generalInset {
+        if view.frame.maxX - planeView.center.x > generalInset && !isGameFailed {
             planeView.center.x += moveStep
         }
     }
@@ -298,5 +299,26 @@ final class GameViewController: UIViewController {
         stopGame()
         UIView.setAnimationsEnabled(true)
         dismiss(animated: true)
+    }
+    
+    @objc private func restartGame() {
+        stopGame()
+        removeBulletsAndEnemies()
+        score = 0
+        isGameFailed = false
+        
+        planeView.center.x = stackView.center.x
+        UIView.setAnimationsEnabled(true)
+        startEnemiesSpawn()
+        startCollisionTracking()
+    }
+    
+    private func removeBulletsAndEnemies() {
+        view.subviews.forEach { subview in
+            guard let subview = subview as? GameObject else { return }
+            if subview.objectType != .player {
+                subview.removeFromSuperview()
+            }
+        }
     }
 }
