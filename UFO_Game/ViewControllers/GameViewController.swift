@@ -53,6 +53,33 @@ final class GameViewController: UIViewController {
         
         return button
     }()
+    private lazy var gameOverAlert = {
+        let alert = UIAlertController(
+            title: "Game Over!",
+            message: "\(gameSettings.playerName), you score - \(score).",
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Exit",
+                style: .default,
+                handler: { [unowned self] _ in
+                    self.exitGame()
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Try again",
+                style: .default,
+                handler: { [unowned self] _ in
+                    self.restartGame()
+                }
+            )
+        )
+        
+        return alert
+    }()
     
     private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
     private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
@@ -218,6 +245,7 @@ final class GameViewController: UIViewController {
                 if objectFramesDidIntersected(planeFrame, and: enemyFrame) {
                     stopGame()
                     print("game over")
+                    present(gameOverAlert, animated: true)
                 }
             }
         }
