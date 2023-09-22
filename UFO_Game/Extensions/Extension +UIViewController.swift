@@ -17,7 +17,7 @@ extension UIViewController {
     var insetFromScreenEdges: CGFloat { 20 }
     var cornerRadius: CGFloat { buttonHeight / 4 }
     
-    func getGameButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
+    func getButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
         let button = UIButton(type: .roundedRect)
         button.layer.cornerRadius = cornerRadius
         button.backgroundColor = .white

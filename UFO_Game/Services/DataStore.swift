@@ -17,14 +17,14 @@ class DataStore {
     
     private init() {}
     
-    func saveSettings(_ userSettings: SelectedUserSettings) {
+    func saveSettings(_ userSettings: GameSettings) {
         let data = try? JSONEncoder().encode(userSettings)
         userDefaults.set(data, forKey: key)
     }
     
-    func readUserSettings() -> SelectedUserSettings? {
+    func readSettings() -> GameSettings? {
         guard let data = userDefaults.value(forKey: key) as? Data else { return nil }
-        let userSettings = try? JSONDecoder().decode(SelectedUserSettings.self, from: data)
+        let userSettings = try? JSONDecoder().decode(GameSettings.self, from: data)
         return userSettings
     }
     

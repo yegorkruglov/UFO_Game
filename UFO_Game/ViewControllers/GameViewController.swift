@@ -10,16 +10,13 @@ import SnapKit
 
 final class GameViewController: UIViewController {
     
-    private var selectedPlayer: Icons.Player
-    private var selectedBullet: Icons.Bullet
-    private var selectedEnemy: Icons.Enemy
-    private var difficulty: Difficulty
+    private let gameSettings: GameSettings
     
     private lazy var planeView = {
         let plane = GameObject(
             frame: .zero,
             objectType: .player,
-            imageName: selectedPlayer.rawValue
+            imageName: gameSettings.playerIcon.rawValue
         )
         
         return plane
@@ -33,9 +30,9 @@ final class GameViewController: UIViewController {
         
         return stack
     }()
-    private lazy var leftButton = getGameButton(selector: #selector(moveLeft), imageName: "arrowshape.left.fill")
-    private lazy var rightButton = getGameButton(selector: #selector(moveRight), imageName: "arrowshape.right.fill")
-    private lazy var fireButton = getGameButton(selector: #selector(fire), title: "FIRE")
+    private lazy var leftButton = getButton(selector: #selector(moveLeft), imageName: "arrowshape.left.fill")
+    private lazy var rightButton = getButton(selector: #selector(moveRight), imageName: "arrowshape.right.fill")
+    private lazy var fireButton = getButton(selector: #selector(fire), title: "FIRE")
     
     private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
     private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
@@ -62,14 +59,8 @@ final class GameViewController: UIViewController {
         startCollisionTracking()
     }
     
-    init(selectedPlayer: Icons.Player, 
-         selectedBullet: Icons.Bullet,
-         selectedEnemy: Icons.Enemy,
-         difficulty: Difficulty) {
-        self.selectedPlayer = selectedPlayer
-        self.selectedBullet = selectedBullet
-        self.selectedEnemy = selectedEnemy
-        self.difficulty = difficulty
+    init(gameSettings: GameSettings) {
+        self.gameSettings = gameSettings
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -111,7 +102,7 @@ final class GameViewController: UIViewController {
     
     private func startEnemiesSpawn() {
         timer = Timer.scheduledTimer(
-            timeInterval: 1.0 / difficulty.rawValue,
+            timeInterval: 1.0 / gameSettings.difficulty.rawValue,
             target: self,
             selector: #selector(generateEnemy),
             userInfo: nil,
@@ -127,7 +118,7 @@ final class GameViewController: UIViewController {
                 width: objectHeight,
                 height: objectHeight),
             objectType: .enemy,
-            imageName: selectedEnemy.rawValue
+            imageName: gameSettings.enemyIcon.rawValue
         )
         
         enemyView.center.x = Double.random(in: minX...maxX)
@@ -135,7 +126,7 @@ final class GameViewController: UIViewController {
         DispatchQueue.main.async { [unowned self] in
             self.view.insertSubview(enemyView, belowSubview: stackView)
             UIView.animate(
-                withDuration: 4 / difficulty.rawValue,
+                withDuration: 4 / gameSettings.difficulty.rawValue,
                 delay: 0,
                 options: .curveLinear,
                 animations: { [unowned self] in
@@ -225,7 +216,7 @@ final class GameViewController: UIViewController {
                 )
             ),
             objectType: .bullet,
-            imageName: selectedBullet.rawValue
+            imageName: gameSettings.bulletIcon.rawValue
         )
         
         bullet.center = planeView.center

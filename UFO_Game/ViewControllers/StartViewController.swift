@@ -18,35 +18,21 @@ class StartViewController: UIViewController {
         
         return stack
     }()
-    private lazy var startButton = getGameButton(selector: #selector(startGame), title: "START")
-    private lazy var settingsButton = getGameButton(selector: #selector(openSettings), title: "SETTINGS")
-    private lazy var leaderboardButton = getGameButton(selector: #selector(openLeaderBoard), title: "LEADERBOARD")
+    private lazy var startButton = getButton(selector: #selector(startGame), title: "START")
+    private lazy var settingsButton = getButton(selector: #selector(openSettings), title: "SETTINGS")
+    private lazy var leaderboardButton = getButton(selector: #selector(openLeaderBoard), title: "LEADERBOARD")
+    private var gameSettings: GameSettings!
+    private let dataStore = DataStore.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
     }
     
-    @objc private func startGame() {
-        let gameVC = GameViewController(
-            selectedPlayer: .player1,
-            selectedBullet: .bullet1,
-            selectedEnemy: .enemy1,
-            difficulty: .easy
-        )
-        gameVC.modalTransitionStyle = .crossDissolve
-        present(gameVC, animated: true)
-    }
-    
-    @objc private func openSettings() {
-        let settingsVC = SettingsViewController()
-        settingsVC.modalPresentationStyle = .fullScreen
-        settingsVC.modalTransitionStyle = .flipHorizontal
-        present(settingsVC, animated: true)
-    }
-    
-    @objc private func openLeaderBoard() {
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadSettings()
     }
     
 }
@@ -65,5 +51,38 @@ extension StartViewController {
             make.center.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3)
         }
+    }
+    
+    private func loadSettings() {
+        guard let loadedSettings = dataStore.readSettings() else {
+            gameSettings = GameSettings(
+                playerName: "Unknown Player",
+                playerIcon: .player1,
+                enemyIcon: .enemy1,
+                bulletIcon: .bullet1,
+                difficulty: .easy
+            )
+            return
+        }
+        
+        gameSettings = loadedSettings
+    }
+    
+    @objc private func startGame() {
+        let gameVC = GameViewController(gameSettings: gameSettings)
+        gameVC.modalTransitionStyle = .crossDissolve
+        present(gameVC, animated: true)
+    }
+    
+    @objc private func openSettings() {
+        let settingsVC = SettingsViewController()
+        settingsVC.modalPresentationStyle = .fullScreen
+        settingsVC.modalTransitionStyle = .flipHorizontal
+        
+        present(settingsVC, animated: true)
+    }
+    
+    @objc private func openLeaderBoard() {
+        
     }
 }
