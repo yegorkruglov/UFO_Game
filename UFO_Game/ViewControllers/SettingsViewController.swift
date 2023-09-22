@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
     }()
     private lazy var iconsLabel = {
         let label = UILabel()
-        label.text = "Choose fighter, enemies, missiles"
+        label.text = "Adjust settings"
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = .clear
@@ -86,7 +86,7 @@ class SettingsViewController: UIViewController {
         let levels: [String] = Difficulty.allCases.map { $0.name }
         let seg = UISegmentedControl(items: levels)
         seg.selectedSegmentIndex = 1
-        seg.backgroundColor = .lightGray
+        seg.backgroundColor = .white
         
         return seg
     }()
@@ -134,7 +134,7 @@ extension SettingsViewController {
         buttonStackView.addArrangedSubview(dismissButton)
         buttonStackView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(insetFromScreenEdges)
-            make.bottom.equalToSuperview().inset(generalInset)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.height.equalTo(buttonHeight)
             make.centerX.equalToSuperview()
         }

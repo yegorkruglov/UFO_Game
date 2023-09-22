@@ -95,7 +95,7 @@ final class GameViewController: UIViewController {
         view.addSubview(planeView)
         
         stackView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(generalInset)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.leading.equalToSuperview().inset(generalInset)
             make.trailing.equalToSuperview().inset(generalInset)
             make.height.equalTo(buttonHeight)
