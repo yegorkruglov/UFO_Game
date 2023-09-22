@@ -33,6 +33,26 @@ final class GameViewController: UIViewController {
     private lazy var leftButton = getButton(selector: #selector(moveLeft), imageName: "arrowshape.left.fill")
     private lazy var rightButton = getButton(selector: #selector(moveRight), imageName: "arrowshape.right.fill")
     private lazy var fireButton = getButton(selector: #selector(fire), title: "FIRE")
+    private lazy var scoreLabel = {
+        let label = UILabel()
+        label.text = String(score)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: heightS, weight: .bold)
+        
+        return label
+    }()
+    private lazy var exitButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
+        button.addTarget(nil, action: #selector(exitGame), for: .touchUpInside)
+        button.tintColor = .white
+        button.imageView?.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
+        
+        return button
+    }()
     
     private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
     private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
@@ -44,6 +64,11 @@ final class GameViewController: UIViewController {
     private var timer: Timer?
     private var displayLink: CADisplayLink?
     private var isGameFailed = false
+    private var score = 0 {
+        didSet {
+            scoreLabel.text = String(score)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +82,7 @@ final class GameViewController: UIViewController {
         planeView.translatesAutoresizingMaskIntoConstraints = true
         startEnemiesSpawn()
         startCollisionTracking()
+        scoreLabel.layer.cornerRadius = cornerRadiusS
     }
     
     init(gameSettings: GameSettings) {
@@ -79,25 +105,41 @@ final class GameViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
+        
         view.addSubview(stackView)
         stackView.addArrangedSubview(leftButton)
         stackView.addArrangedSubview(fireButton)
         stackView.addArrangedSubview(rightButton)
-        view.addSubview(planeView)
-        
         stackView.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-            make.leading.equalToSuperview().inset(generalInset)
-            make.trailing.equalToSuperview().inset(generalInset)
-            make.height.equalTo(buttonHeight)
+            make.leading.equalToSuperview().inset(insetFromScreenEdges)
+            make.trailing.equalToSuperview().inset(insetFromScreenEdges)
+            make.height.equalTo(heightM)
         }
         
+        view.addSubview(planeView)
         planeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(stackView.snp.top).inset(-generalInset)
             make.height.equalTo(objectHeight)
             make.width.equalTo(objectHeight)
         }
+        
+        view.addSubview(scoreLabel)
+        scoreLabel.snp.makeConstraints { make in
+            make.height.width.equalTo(heightM)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.trailing.equalToSuperview().inset(insetFromScreenEdges)
+            scoreLabel.layer.cornerRadius = cornerRadiusS
+        }
+        
+        view.addSubview(exitButton)
+        exitButton.snp.makeConstraints { make in
+            make.size.equalTo(heightS)
+            make.centerY.equalTo(scoreLabel)
+            make.leading.equalToSuperview().offset(insetFromScreenEdges)
+        }
+        
     }
     
     private func startEnemiesSpawn() {
@@ -190,6 +232,7 @@ final class GameViewController: UIViewController {
                     
                     if objectFramesDidIntersected(enemyFrame, and: bulletFrame) {
                         print("enemy terminated")
+                        score += 1
                         enemy.removeFromSuperview()
                         bullet.removeFromSuperview()
                     }
@@ -249,5 +292,11 @@ final class GameViewController: UIViewController {
         if view.frame.maxX - planeView.center.x > generalInset {
             planeView.center.x += moveStep
         }
+    }
+    
+    @objc private func exitGame() {
+        stopGame()
+        UIView.setAnimationsEnabled(true)
+        dismiss(animated: true)
     }
 }

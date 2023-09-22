@@ -81,7 +81,7 @@ class SettingsViewController: UIViewController {
     private lazy var segmentsBackgroundView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.layer.cornerRadius = cornerRadius
+        view.layer.cornerRadius = cornerRadiusM
         
         return view
     }()
@@ -108,7 +108,7 @@ extension SettingsViewController {
         buttonStackView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(insetFromScreenEdges)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-            make.height.equalTo(buttonHeight)
+            make.height.equalTo(heightM)
             make.centerX.equalToSuperview()
         }
         
@@ -117,7 +117,7 @@ extension SettingsViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.centerX.equalToSuperview()
             make.horizontalEdges.equalTo(buttonStackView)
-            make.height.equalTo(buttonStackView).dividedBy(2)
+            make.height.equalTo(heightS)
         }
         
         view.addSubview(nameTextField)
@@ -125,16 +125,16 @@ extension SettingsViewController {
             make.centerX.equalToSuperview()
             make.width.equalTo(buttonStackView)
             make.top.equalTo(nameLabel.snp.bottom).offset(generalInset)
-            make.height.equalTo(buttonStackView).dividedBy(2)
+            make.height.equalTo(heightS)
         }
-        nameTextField.layer.cornerRadius = cornerRadius
+        nameTextField.layer.cornerRadius = cornerRadiusM
         
         view.addSubview(iconsLabel)
         iconsLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(buttonStackView)
             make.top.equalTo(nameTextField.snp.bottom).offset(generalInset)
-            make.height.equalTo(buttonStackView).dividedBy(2)
+            make.height.equalTo(heightS)
         }
         
         view.addSubview(segmentsBackgroundView)

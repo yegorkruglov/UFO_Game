@@ -11,15 +11,17 @@ extension UIViewController {
     
     var screenHeight: CGFloat { view.frame.height }
     var screenWidth: CGFloat { view.frame.width }
-    var buttonHeight: CGFloat { screenHeight / 10 }
+    var heightM: CGFloat { screenHeight / 10 }
+    var heightS: CGFloat { screenHeight / 20 }
     var generalInset: CGFloat { 20 }
     var stackInset: CGFloat { 10 }
     var insetFromScreenEdges: CGFloat { 20 }
-    var cornerRadius: CGFloat { buttonHeight / 4 }
+    var cornerRadiusM: CGFloat { heightM / 4 }
+    var cornerRadiusS: CGFloat { heightS / 4 }
     
     func getButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
         let button = UIButton(type: .roundedRect)
-        button.layer.cornerRadius = cornerRadius
+        button.layer.cornerRadius = cornerRadiusM
         button.backgroundColor = .white
         button.addTarget(nil, action: selector, for: .touchUpInside)
         if let title = title {
