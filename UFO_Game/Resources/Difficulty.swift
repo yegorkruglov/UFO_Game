@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Difficulty: Double, CaseIterable {
+enum Difficulty: Double, CaseIterable, Codable {
     case easy = 0.5
     case normal = 1
     case extreme = 2

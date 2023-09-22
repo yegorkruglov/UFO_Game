@@ -8,19 +8,19 @@
 import Foundation
 
 enum Icons {
-    enum Player: String, CaseIterable {
+    enum Player: String, CaseIterable, Codable {
         case player1 = "player1"
         case player2 = "player2"
         case player3 = "player3"
     }
     
-    enum Enemy: String, CaseIterable {
+    enum Enemy: String, CaseIterable, Codable {
         case enemy1 = "enemy1"
         case enemy2 = "enemy2"
         case enemy3 = "enemy3"
     }
     
-    enum Bullet: String, CaseIterable {
+    enum Bullet: String, CaseIterable, Codable {
         case bullet1 = "bullet1"
         case bullet2 = "bullet2"
         case bullet3 = "bullet3"

@@ -13,6 +13,9 @@ class SettingsViewController: UIViewController {
     private var selectedPlayerIcon: Icons.Player?
     private var selectedEnemyIcon: Icons.Enemy?
     private var selectedBulletIcon: Icons.Bullet?
+    private var selectedDifficulty: Difficulty?
+    
+    private let dataStore = DataStore.shared
     
     private lazy var nameLabel = {
         let label = UILabel()
@@ -26,7 +29,8 @@ class SettingsViewController: UIViewController {
     }()
     private lazy var iconsLabel = {
         let label = UILabel()
-        label.text = "Adjust settings"
+        label.text = "Choose fighter, enemies, weapon and difficulty level"
+        label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = .clear
@@ -60,7 +64,7 @@ class SettingsViewController: UIViewController {
             UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
         }
         let seg = UISegmentedControl(items: icons)
-        seg.selectedSegmentIndex = 1
+        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
         
         return seg
     }()
@@ -69,7 +73,7 @@ class SettingsViewController: UIViewController {
             UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
         }
         let seg = UISegmentedControl(items: icons)
-        seg.selectedSegmentIndex = 1
+        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
         
         return seg
     }()
@@ -78,15 +82,15 @@ class SettingsViewController: UIViewController {
             UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
         }
         let seg = UISegmentedControl(items: icons)
-        seg.selectedSegmentIndex = 1
+        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
         
         return seg
     }()
     private lazy var difficultySelectionSegment = {
         let levels: [String] = Difficulty.allCases.map { $0.name }
         let seg = UISegmentedControl(items: levels)
-        seg.selectedSegmentIndex = 1
         seg.backgroundColor = .white
+        seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
         
         return seg
     }()
@@ -105,24 +109,84 @@ class SettingsViewController: UIViewController {
         
         return view
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         nameTextField.delegate = self
+        loadSettings()
     }
     
     deinit{
         print("SettingsVC was realesed")
     }
-    @objc private func saveSettings() {
+    
+    private func loadSettings() {
+        guard let loadedUserSettings = dataStore.readUserSettings() else { return }
         
+        guard let loadedPlayerName = loadedUserSettings.selectedPlayerName else { return }
+        nameTextField.text = loadedPlayerName
+        selectedPlayerName = loadedPlayerName
+        
+        guard let loadedPlayerIcon = loadedUserSettings.selectedPlayerIcon else { return }
+        selectedPlayerIcon = loadedPlayerIcon
+        guard let playerIconIndex = Icons.Player.allCases.firstIndex(of: loadedPlayerIcon) else { return }
+        playerSelectionSegment.selectedSegmentIndex = playerIconIndex
+        
+        guard let loadedEnemyIcon = loadedUserSettings.selectedEnemyIcon else { return }
+        selectedEnemyIcon = loadedEnemyIcon
+        guard let enemyIconIndex = Icons.Enemy.allCases.firstIndex(of: loadedEnemyIcon) else { return }
+        enemySelectionSegment.selectedSegmentIndex = enemyIconIndex
+        
+        guard let loadedBulletIcon = loadedUserSettings.selectedBulletIcon else { return }
+        selectedBulletIcon = loadedBulletIcon
+        guard let bulletIconIndex = Icons.Bullet.allCases.firstIndex(of: loadedBulletIcon) else { return }
+        bulletSelectionSegment.selectedSegmentIndex = bulletIconIndex
+        
+        guard let loadedDifficulty = loadedUserSettings.selectedDifficulty else { return }
+        selectedDifficulty = loadedDifficulty
+        guard let difficultyIndex = Difficulty.allCases.firstIndex(of: loadedDifficulty) else { return }
+        difficultySelectionSegment.selectedSegmentIndex = difficultyIndex
+    }
+    
+    @objc private func saveSettings() {
+        guard let selectedPlayerName,
+              let selectedPlayerIcon,
+              let selectedEnemyIcon,
+              let selectedBulletIcon,
+              let selectedDifficulty
+        else { return }
+        
+        
+        let userSettings = SelectedUserSettings(
+            selectedPlayerName: selectedPlayerName,
+            selectedPlayerIcon: selectedPlayerIcon,
+            selectedEnemyIcon: selectedEnemyIcon,
+            selectedBulletIcon: selectedBulletIcon,
+            selectedDifficulty: selectedDifficulty
+        )
+        
+        dataStore.saveSettings(userSettings)
+        
+        dismiss(animated: true)
     }
     
     @objc private func dismissSettings() {
         dismiss(animated: true)
+    }
+    
+    @objc private func playerMadeSelection(_ sender: UISegmentedControl) {
+        switch sender {
+        case playerSelectionSegment:
+            selectedPlayerIcon = Icons.Player.allCases[sender.selectedSegmentIndex]
+        case enemySelectionSegment:
+            selectedEnemyIcon = Icons.Enemy.allCases[sender.selectedSegmentIndex]
+        case bulletSelectionSegment:
+            selectedBulletIcon = Icons.Bullet.allCases[sender.selectedSegmentIndex]
+        default:
+            selectedDifficulty = Difficulty.allCases[sender.selectedSegmentIndex]
+        }
     }
 }
 
