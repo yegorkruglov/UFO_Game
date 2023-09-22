@@ -34,11 +34,10 @@ class StartViewController: UIViewController {
         super.viewDidAppear(animated)
         loadSettings()
     }
-    
 }
 
-extension StartViewController {
-    private func setupUI() {
+private extension StartViewController {
+    func setupUI() {
         view.backgroundColor = .black
         
         stackView.addArrangedSubview(startButton)
@@ -53,7 +52,7 @@ extension StartViewController {
         }
     }
     
-    private func loadSettings() {
+    func loadSettings() {
         guard let loadedSettings = dataStore.readSettings() else {
             gameSettings = GameSettings(
                 playerName: "Unknown Player",
@@ -68,13 +67,13 @@ extension StartViewController {
         gameSettings = loadedSettings
     }
     
-    @objc private func startGame() {
+    @objc func startGame() {
         let gameVC = GameViewController(gameSettings: gameSettings)
         gameVC.modalTransitionStyle = .crossDissolve
         present(gameVC, animated: true)
     }
     
-    @objc private func openSettings() {
+    @objc func openSettings() {
         let settingsVC = SettingsViewController()
         settingsVC.modalPresentationStyle = .fullScreen
         settingsVC.modalTransitionStyle = .flipHorizontal
@@ -82,7 +81,10 @@ extension StartViewController {
         present(settingsVC, animated: true)
     }
     
-    @objc private func openLeaderBoard() {
+    @objc func openLeaderBoard() {
+        let leaderboardVC = LeaderBoardViewController()
+        leaderboardVC.modalPresentationStyle = .fullScreen
         
+        present(leaderboardVC, animated: true)
     }
 }

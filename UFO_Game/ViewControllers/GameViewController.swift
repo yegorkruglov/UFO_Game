@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 final class GameViewController: UIViewController {
     
@@ -123,13 +122,15 @@ final class GameViewController: UIViewController {
     deinit {
         print("GameVC was realesed")
     }
-    
-    private func startCollisionTracking() {
+}
+
+extension GameViewController {
+    func startCollisionTracking() {
         displayLink = CADisplayLink(target: self, selector: #selector(checkForCollisions))
         displayLink?.add(to: .main, forMode: .common)
     }
     
-    private func setupUI() {
+    func setupUI() {
         view.backgroundColor = .black
         
         view.addSubview(stackView)
@@ -137,7 +138,7 @@ final class GameViewController: UIViewController {
         stackView.addArrangedSubview(fireButton)
         stackView.addArrangedSubview(rightButton)
         stackView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(insetFromScreenEdges)
             make.leading.equalToSuperview().inset(insetFromScreenEdges)
             make.trailing.equalToSuperview().inset(insetFromScreenEdges)
             make.height.equalTo(heightM)
@@ -168,7 +169,7 @@ final class GameViewController: UIViewController {
         
     }
     
-    private func startEnemiesSpawn() {
+    func startEnemiesSpawn() {
         timer = Timer.scheduledTimer(
             timeInterval: 1.0 / gameSettings.difficulty.rawValue,
             target: self,
@@ -178,7 +179,7 @@ final class GameViewController: UIViewController {
         )
     }
     
-    @objc private func generateEnemy() {
+    @objc func generateEnemy() {
         let enemyView = GameObject(
             frame: CGRect(
                 x: 0,
@@ -209,7 +210,7 @@ final class GameViewController: UIViewController {
         }
     }
     
-    private func stopGame() {
+    func stopGame() {
         isGameFailed = true
         displayLink?.invalidate()
         displayLink = nil
@@ -224,7 +225,7 @@ final class GameViewController: UIViewController {
         }
     }
     
-    @objc private func checkForCollisions() {
+    @objc func checkForCollisions() {
         guard let planeFrame = planeView.layer.presentation()?.frame else { return }
         var enemies: [GameObject] = []
         var bullets: [GameObject] = []
@@ -269,14 +270,14 @@ final class GameViewController: UIViewController {
     }
 #warning("reconsider collision detection logic")
     
-    private func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
+    func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
         firstObjectFrame.intersects(secondObjectFrame)
             && (firstObjectFrame.midY - secondObjectFrame.midY) < (objectHeight / 3)
             && (firstObjectFrame.midX - secondObjectFrame.midX) < (objectHeight / 3)
         
     }
     
-    @objc private func fire() {
+    @objc func fire() {
         if !isGameFailed {
             let bullet = GameObject(
                 frame: .init(
@@ -311,25 +312,25 @@ final class GameViewController: UIViewController {
         }
     }
     
-    @objc private func moveLeft() {
+    @objc func moveLeft() {
         if planeView.center.x > generalInset && !isGameFailed{
             planeView.center.x -= moveStep
         }
     }
     
-    @objc private func moveRight() {
+    @objc func moveRight() {
         if view.frame.maxX - planeView.center.x > generalInset && !isGameFailed {
             planeView.center.x += moveStep
         }
     }
     
-    @objc private func exitGame() {
+    @objc func exitGame() {
         stopGame()
         UIView.setAnimationsEnabled(true)
         dismiss(animated: true)
     }
     
-    @objc private func restartGame() {
+    @objc func restartGame() {
         stopGame()
         removeBulletsAndEnemies()
         score = 0
@@ -341,7 +342,7 @@ final class GameViewController: UIViewController {
         startCollisionTracking()
     }
     
-    private func removeBulletsAndEnemies() {
+    func removeBulletsAndEnemies() {
         view.subviews.forEach { subview in
             guard let subview = subview as? GameObject else { return }
             if subview.objectType != .player {

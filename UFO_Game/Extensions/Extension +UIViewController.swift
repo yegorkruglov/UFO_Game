@@ -13,6 +13,7 @@ extension UIViewController {
     var screenWidth: CGFloat { view.frame.width }
     var heightM: CGFloat { screenHeight / 10 }
     var heightS: CGFloat { screenHeight / 20 }
+    var heightXS: CGFloat { screenHeight / 50 }
     var generalInset: CGFloat { 20 }
     var stackInset: CGFloat { 10 }
     var insetFromScreenEdges: CGFloat { 20 }
@@ -22,6 +23,7 @@ extension UIViewController {
     func getButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
         let button = UIButton(type: .roundedRect)
         button.layer.cornerRadius = cornerRadiusM
+        button.titleLabel?.font = UIFont.systemFont(ofSize: heightXS, weight: .bold)
         button.backgroundColor = .white
         button.addTarget(nil, action: selector, for: .touchUpInside)
         if let title = title {
