@@ -12,6 +12,7 @@ class GameObject: UIView {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: self.imageName)
+        imageView.clipsToBounds = false
         
         return imageView
     }()
@@ -33,7 +34,8 @@ class GameObject: UIView {
     private func setupView() {
         addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.size.equalToSuperview()
+            make.size.equalToSuperview().multipliedBy(2)
+            make.center.equalToSuperview()
         }
     }
     

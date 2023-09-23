@@ -21,6 +21,7 @@ class StartViewController: UIViewController {
     private lazy var startButton = getButton(selector: #selector(startGame), title: "START")
     private lazy var settingsButton = getButton(selector: #selector(openSettings), title: "SETTINGS")
     private lazy var leaderboardButton = getButton(selector: #selector(openLeaderBoard), title: "LEADERBOARD")
+    
     private var gameSettings: GameSettings!
     private let dataStore = DataStore.shared
     

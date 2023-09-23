@@ -80,8 +80,8 @@ final class GameViewController: UIViewController {
         return alert
     }
     
-    private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
-    private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
+    private lazy var objectHeight: CGFloat = { screenWidth / 10 }()
+    private lazy var bulletHeight: CGFloat = { screenWidth / 40 }()
     private lazy var objectRunDistance: CGFloat = { screenHeight + objectHeight * 2 }()
     private lazy var moveStep: CGFloat = { screenWidth / 10 }()
     private lazy var minX: CGFloat = { view.frame.width / 8 }()
@@ -149,7 +149,7 @@ extension GameViewController {
         view.addSubview(planeView)
         planeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(stackView.snp.top).inset(-generalInset)
+            make.bottom.equalTo(stackView.snp.top).inset(-generalInset * 2)
             make.height.equalTo(objectHeight)
             make.width.equalTo(objectHeight)
         }
@@ -270,13 +270,9 @@ extension GameViewController {
             }
         }
     }
-#warning("reconsider collision detection logic")
     
     func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
         firstObjectFrame.intersects(secondObjectFrame)
-            && (firstObjectFrame.midY - secondObjectFrame.midY) < (objectHeight / 3)
-            && (firstObjectFrame.midX - secondObjectFrame.midX) < (objectHeight / 3)
-        
     }
     
     @objc func fire() {

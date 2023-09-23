@@ -65,7 +65,6 @@ class SettingsViewController: UIViewController {
     private lazy var difficultySelectionSegment = {
         let levels: [String] = Difficulty.allCases.map { $0.name }
         let seg = UISegmentedControl(items: levels)
-        seg.backgroundColor = .white
         seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
         
         return seg
