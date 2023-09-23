@@ -43,7 +43,7 @@ final class GameViewController: UIViewController {
     }()
     private lazy var exitButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "x.circle"), for: .normal)
+        button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         button.addTarget(nil, action: #selector(exitGame), for: .touchUpInside)
         button.tintColor = .white
         button.imageView?.snp.makeConstraints({ make in
@@ -52,7 +52,7 @@ final class GameViewController: UIViewController {
         
         return button
     }()
-    private lazy var gameOverAlert = {
+    private var gameOverAlert: UIAlertController {
         let alert = UIAlertController(
             title: "Game Over!",
             message: "\(gameSettings.playerName), you score - \(score).",
@@ -78,7 +78,7 @@ final class GameViewController: UIViewController {
         )
         
         return alert
-    }()
+    }
     
     private lazy var objectHeight: CGFloat = { screenWidth / 6 }()
     private lazy var bulletHeight: CGFloat = { screenWidth / 15 }()
@@ -95,6 +95,8 @@ final class GameViewController: UIViewController {
             scoreLabel.text = String(score)
         }
     }
+    private lazy var playerName = { gameSettings.playerName }()
+    private let dataStore = DataStore.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -324,8 +326,14 @@ extension GameViewController {
         }
     }
     
+    func saveGameResults() {
+        let gameResults = GameResults(playerName: playerName, score: score)
+        dataStore.saveGameResults(gameResults)
+    }
+    
     @objc func exitGame() {
         stopGame()
+        saveGameResults()
         UIView.setAnimationsEnabled(true)
         dismiss(animated: true)
     }
@@ -333,11 +341,13 @@ extension GameViewController {
     @objc func restartGame() {
         stopGame()
         removeBulletsAndEnemies()
-        score = 0
+        saveGameResults()
+        
         isGameFailed = false
         
         planeView.center.x = stackView.center.x
         UIView.setAnimationsEnabled(true)
+        score = 0
         startEnemiesSpawn()
         startCollisionTracking()
     }

@@ -101,6 +101,7 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController {
     private func setupUI() {
+        view.backgroundColor = .black
         
         view.addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(saveButton)

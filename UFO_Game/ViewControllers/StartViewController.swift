@@ -61,6 +61,7 @@ private extension StartViewController {
                 bulletIcon: .bullet1,
                 difficulty: .easy
             )
+            dataStore.saveSettings(gameSettings)
             return
         }
         
@@ -70,13 +71,13 @@ private extension StartViewController {
     @objc func startGame() {
         let gameVC = GameViewController(gameSettings: gameSettings)
         gameVC.modalTransitionStyle = .crossDissolve
+        gameVC.modalPresentationStyle = .fullScreen
         present(gameVC, animated: true)
     }
     
     @objc func openSettings() {
         let settingsVC = SettingsViewController()
         settingsVC.modalPresentationStyle = .fullScreen
-        settingsVC.modalTransitionStyle = .flipHorizontal
         
         present(settingsVC, animated: true)
     }
