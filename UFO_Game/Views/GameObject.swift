@@ -48,4 +48,5 @@ enum GameObjectType: String {
     case player = "Player"
     case enemy = "Enemy"
     case bullet = "Bullet"
+    case backGroundItem = "BackGroundItem"
 }

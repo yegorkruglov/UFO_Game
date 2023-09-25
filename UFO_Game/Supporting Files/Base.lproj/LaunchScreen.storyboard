@@ -15,39 +15,8 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mars" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-1s-SR1">
-                                <rect key="frame" x="-113" y="-32" width="363" height="290"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="290" id="IeX-Jr-eHg"/>
-                                    <constraint firstAttribute="width" constant="363" id="bfq-qq-QFu"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venus" translatesAutoresizingMaskIntoConstraints="NO" id="Prq-3O-QjD">
-                                <rect key="frame" x="-153" y="534" width="475" height="425"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="475" id="1lt-Fz-muh"/>
-                                    <constraint firstAttribute="height" constant="425" id="HsL-Jx-a04"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mercury" translatesAutoresizingMaskIntoConstraints="NO" id="C7W-E2-uss">
-                                <rect key="frame" x="210" y="253" width="286" height="206"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="286" id="8fq-dL-veB"/>
-                                    <constraint firstAttribute="height" constant="206" id="qQe-oy-tWx"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="C7W-E2-uss" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="210" id="Qz5-pq-djq"/>
-                            <constraint firstItem="hfe-1s-SR1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-91" id="a4c-Pj-8JM"/>
-                            <constraint firstItem="C7W-E2-uss" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="194" id="k1K-dh-nxh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Prq-3O-QjD" secondAttribute="trailing" constant="71" id="mcr-16-0Bi"/>
-                            <constraint firstItem="Prq-3O-QjD" firstAttribute="top" secondItem="C7W-E2-uss" secondAttribute="bottom" constant="75" id="tB6-77-Odr"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hfe-1s-SR1" secondAttribute="trailing" constant="143" id="tHl-E9-ud5"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -55,9 +24,4 @@
             <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="mars" width="512" height="512"/>
-        <image name="mercury" width="512" height="512"/>
-        <image name="venus" width="512" height="512"/>
-    </resources>
 </document>

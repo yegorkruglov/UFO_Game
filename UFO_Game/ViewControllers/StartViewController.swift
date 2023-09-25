@@ -41,6 +41,9 @@ private extension StartViewController {
     func setupUI() {
         view.backgroundColor = .black
         
+        let background = BackgroundView(frame: self.view.frame)
+        view.insertSubview(background, at: 0)
+        
         stackView.addArrangedSubview(startButton)
         stackView.addArrangedSubview(settingsButton)
         stackView.addArrangedSubview(leaderboardButton)
