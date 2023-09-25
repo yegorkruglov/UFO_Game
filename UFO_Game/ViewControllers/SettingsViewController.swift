@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
     private var selectedPlayerName: String?
     private var selectedPlayerIcon: Icons.Player?
@@ -24,6 +24,7 @@ class SettingsViewController: UIViewController {
         label.textColor = .white
         label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
+        label.font = gameFont
         
         return label
     }()
@@ -35,6 +36,7 @@ class SettingsViewController: UIViewController {
         label.textColor = .white
         label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
+        label.font = gameFont
         
         return label
     }()
@@ -66,6 +68,7 @@ class SettingsViewController: UIViewController {
         let levels: [String] = Difficulty.allCases.map { $0.name }
         let seg = UISegmentedControl(items: levels)
         seg.addTarget(self, action: #selector(playerMadeSelection), for: .valueChanged)
+        seg.setTitleTextAttributes([NSAttributedString.Key.font : gameFont], for: .normal)
         
         return seg
     }()

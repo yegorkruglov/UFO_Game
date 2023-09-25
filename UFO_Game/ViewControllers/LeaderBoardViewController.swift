@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LeaderBoardViewController: UIViewController {
+final class LeaderBoardViewController: UIViewController {
 
     private lazy var tableView = {
         let table = UITableView()
@@ -21,7 +21,7 @@ class LeaderBoardViewController: UIViewController {
     private lazy var leaderLabel = {
         let label = UILabel()
         label.text = "LEADERBOARD"
-        label.font = UIFont.systemFont(ofSize: heightXS, weight: .bold)
+        label.font = gameFont
         label.textAlignment = .center
         label.textColor = .white
         
@@ -96,7 +96,7 @@ extension LeaderBoardViewController: UITableViewDataSource {
         let gameResults = leadersData[indexPath.row]
         var config = cell.defaultContentConfiguration()
         config.text = "\(indexPath.row + 1). \(gameResults.playerName) - \(gameResults.score)"
-        config.textProperties.font = UIFont.systemFont(ofSize: heightXS, weight: .bold)
+        config.textProperties.font = gameFont
         cell.contentConfiguration = config
         
         return cell

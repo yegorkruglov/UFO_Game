@@ -13,6 +13,7 @@
 		5D3110072ABB33E3001CEA54 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3110062ABB33E2001CEA54 /* LeaderBoardViewController.swift */; };
 		5D3EEF7C2ABF2605008F9074 /* GameResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3EEF7B2ABF2605008F9074 /* GameResults.swift */; };
 		5D5B535C2AC187D70061F636 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B535B2AC187D70061F636 /* BackgroundView.swift */; };
+		5D5B535E2AC1A0AF0061F636 /* Extension +UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5B535D2AC1A0AF0061F636 /* Extension +UIView.swift */; };
 		5DA615C32ABD9A9F00F7DCA7 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA615C22ABD9A9F00F7DCA7 /* GameSettings.swift */; };
 		5DA615C62ABD9C2300F7DCA7 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA615C52ABD9C2300F7DCA7 /* DataStore.swift */; };
 		5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF9FD62AB710750095CA4A /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 		5D3110062ABB33E2001CEA54 /* LeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewController.swift; sourceTree = "<group>"; };
 		5D3EEF7B2ABF2605008F9074 /* GameResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResults.swift; sourceTree = "<group>"; };
 		5D5B535B2AC187D70061F636 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		5D5B535D2AC1A0AF0061F636 /* Extension +UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension +UIView.swift"; sourceTree = "<group>"; };
 		5DA615C22ABD9A9F00F7DCA7 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		5DA615C52ABD9C2300F7DCA7 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		5DBF9FD32AB710750095CA4A /* UFO_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UFO_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				5D3110012ABB24C2001CEA54 /* Extension +UIViewController.swift */,
+				5D5B535D2AC1A0AF0061F636 /* Extension +UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				5D5B535C2AC187D70061F636 /* BackgroundView.swift in Sources */,
 				5DA615C32ABD9A9F00F7DCA7 /* GameSettings.swift in Sources */,
 				5DBF9FD72AB710750095CA4A /* AppDelegate.swift in Sources */,
+				5D5B535E2AC1A0AF0061F636 /* Extension +UIView.swift in Sources */,
 				5DF33D2A2AB9E03700257A20 /* Icons.swift in Sources */,
 				5DBF9FD92AB710750095CA4A /* SceneDelegate.swift in Sources */,
 				5D3110052ABB33C9001CEA54 /* SettingsViewController.swift in Sources */,

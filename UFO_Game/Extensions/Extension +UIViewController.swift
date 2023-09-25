@@ -19,11 +19,12 @@ extension UIViewController {
     var insetFromScreenEdges: CGFloat { 20 }
     var cornerRadiusM: CGFloat { heightM / 4 }
     var cornerRadiusS: CGFloat { heightS / 4 }
+    var gameFont: UIFont { UIFont.systemFont(ofSize: heightXS, weight: .bold) }
     
     func getButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
         let button = UIButton(type: .roundedRect)
         button.layer.cornerRadius = cornerRadiusM
-        button.titleLabel?.font = UIFont.systemFont(ofSize: heightXS, weight: .bold)
+        button.titleLabel?.font = gameFont
         button.backgroundColor = .white
         button.addTarget(nil, action: selector, for: .touchUpInside)
         if let title = title {

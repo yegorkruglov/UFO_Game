@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameObject: UIView {
+final class GameObject: UIView {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()

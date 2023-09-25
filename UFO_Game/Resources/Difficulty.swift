@@ -15,11 +15,11 @@ enum Difficulty: Double, CaseIterable, Codable {
     var name: String {
         switch self {
         case .easy:
-            return "Easy"
+            return "EASY"
         case .normal:
-            return "Normal"
+            return "NORMAL"
         case .extreme:
-            return "Extreme"
+            return "EXTREME"
         }
     }
 }

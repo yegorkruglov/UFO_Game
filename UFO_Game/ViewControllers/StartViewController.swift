@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class StartViewController: UIViewController {
+final class StartViewController: UIViewController {
     
     private lazy var stackView = {
         let stack = UIStackView()

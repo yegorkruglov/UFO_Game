@@ -8,9 +8,7 @@
 import UIKit
 
 final class GameViewController: UIViewController {
-    
-    private let gameSettings: GameSettings
-    
+        
     private lazy var planeView = {
         let plane = GameObject(
             frame: .zero,
@@ -52,6 +50,12 @@ final class GameViewController: UIViewController {
         
         return button
     }()
+    private lazy var background = {
+        let back = BackgroundView(frame: self.view.frame)
+        back.alpha = 0.6
+        
+        return back
+    }()
     private var gameOverAlert: UIAlertController {
         let alert = UIAlertController(
             title: "Game Over!",
@@ -81,7 +85,7 @@ final class GameViewController: UIViewController {
     }
     
     private lazy var objectHeight: CGFloat = { screenWidth / 10 }()
-    private lazy var bulletHeight: CGFloat = { screenWidth / 40 }()
+    private lazy var bulletHeight: CGFloat = { screenWidth / 30 }()
     private lazy var objectRunDistance: CGFloat = { screenHeight + objectHeight * 2 }()
     private lazy var moveStep: CGFloat = { screenWidth / 10 }()
     private lazy var minX: CGFloat = { view.frame.width / 8 }()
@@ -95,8 +99,9 @@ final class GameViewController: UIViewController {
             scoreLabel.text = String(score)
         }
     }
-    private lazy var playerName = { gameSettings.playerName }()
     private let dataStore = DataStore.shared
+    private let gameSettings: GameSettings
+    private lazy var playerName = { gameSettings.playerName }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +139,8 @@ extension GameViewController {
     
     func setupUI() {
         view.backgroundColor = .black
+        
+        view.insertSubview(background, at: 0)
         
         view.addSubview(stackView)
         stackView.addArrangedSubview(leftButton)
