@@ -9,14 +9,6 @@ import UIKit
 
 final class SettingsViewController: UIViewController {
     
-    private var selectedPlayerName: String?
-    private var selectedPlayerIcon: Icons.Player?
-    private var selectedEnemyIcon: Icons.Enemy?
-    private var selectedBulletIcon: Icons.Bullet?
-    private var selectedDifficulty: Difficulty?
-    
-    private let dataStore = DataStore.shared
-    
     private lazy var nameLabel = {
         let label = UILabel()
         label.text = "Enter your name"
@@ -88,6 +80,14 @@ final class SettingsViewController: UIViewController {
         return view
     }()
     
+    private var selectedPlayerName: String?
+    private var selectedPlayerIcon: Icons.Player?
+    private var selectedEnemyIcon: Icons.Enemy?
+    private var selectedBulletIcon: Icons.Bullet?
+    private var selectedDifficulty: Difficulty?
+    
+    private let dataStore = DataStore.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,8 +101,8 @@ final class SettingsViewController: UIViewController {
     }
 }
 
-extension SettingsViewController {
-    private func setupUI() {
+private extension SettingsViewController {
+    func setupUI() {
         view.backgroundColor = .black
         
         view.addSubview(buttonStackView)
@@ -157,7 +157,7 @@ extension SettingsViewController {
         }
     }
     
-    private func generateSegmentedControll(for type: [String]) -> UISegmentedControl {
+    func generateSegmentedControll(for type: [String]) -> UISegmentedControl {
         let icons: [UIImage] = type.map {
             UIImage(named: $0)?.withRenderingMode(.alwaysOriginal) ?? UIImage()
         }
@@ -167,7 +167,7 @@ extension SettingsViewController {
         return seg
     }
     
-    private func loadSettings() {
+    func loadSettings() {
         guard let loadedUserSettings = dataStore.readSettings() else { return }
         
         let loadedPlayerName = loadedUserSettings.playerName
@@ -195,7 +195,7 @@ extension SettingsViewController {
         difficultySelectionSegment.selectedSegmentIndex = difficultyIndex
     }
     
-    @objc private func saveSettings() {
+    @objc func saveSettings() {
         guard let selectedPlayerName,
               let selectedPlayerIcon,
               let selectedEnemyIcon,
@@ -216,11 +216,11 @@ extension SettingsViewController {
         dismiss(animated: true)
     }
     
-    @objc private func dismissSettings() {
+    @objc func dismissSettings() {
         dismiss(animated: true)
     }
     
-    @objc private func playerMadeSelection(_ sender: UISegmentedControl) {
+    @objc func playerMadeSelection(_ sender: UISegmentedControl) {
         switch sender {
         case playerSelectionSegment:
             selectedPlayerIcon = Icons.Player.allCases[sender.selectedSegmentIndex]
@@ -236,7 +236,7 @@ extension SettingsViewController {
 
 extension SettingsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let typedPlayerName = nameTextField.text, typedPlayerName != "" else { return false}
+        guard let typedPlayerName = nameTextField.text, typedPlayerName != "" else { return false }
         selectedPlayerName = typedPlayerName
         nameTextField.resignFirstResponder()
         return true

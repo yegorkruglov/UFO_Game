@@ -39,10 +39,10 @@ final class GameViewController: UIViewController {
         
         return label
     }()
-    private lazy var exitButton = {
+    private lazy var closeButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        button.addTarget(nil, action: #selector(exitGame), for: .touchUpInside)
+        button.addTarget(nil, action: #selector(closeGame), for: .touchUpInside)
         button.tintColor = .white
         button.imageView?.snp.makeConstraints({ make in
             make.edges.equalToSuperview()
@@ -84,13 +84,6 @@ final class GameViewController: UIViewController {
         return alert
     }
     
-    private lazy var objectHeight: CGFloat = { screenWidth / 10 }()
-    private lazy var bulletHeight: CGFloat = { screenWidth / 30 }()
-    private lazy var objectRunDistance: CGFloat = { screenHeight + objectHeight * 2 }()
-    private lazy var moveStep: CGFloat = { screenWidth / 10 }()
-    private lazy var minX: CGFloat = { view.frame.width / 8 }()
-    private lazy var maxX: CGFloat = { view.frame.width - minX }()
-    
     private var timer: Timer?
     private var displayLink: CADisplayLink?
     private var isGameFailed = false
@@ -131,7 +124,14 @@ final class GameViewController: UIViewController {
     }
 }
 
-extension GameViewController {
+private extension GameViewController {
+    var objectHeight: CGFloat { screenWidth / 10 }
+    var bulletHeight: CGFloat { screenWidth / 30 }
+    var objectRunDistance: CGFloat { screenHeight + objectHeight * 2 }
+    var moveStep: CGFloat { screenWidth / 10 }
+    var minX: CGFloat { view.frame.width / 8 }
+    var maxX: CGFloat { view.frame.width - minX }
+    
     func startCollisionTracking() {
         displayLink = CADisplayLink(target: self, selector: #selector(checkForCollisions))
         displayLink?.add(to: .main, forMode: .common)
@@ -169,8 +169,8 @@ extension GameViewController {
             scoreLabel.layer.cornerRadius = cornerRadiusS
         }
         
-        view.addSubview(exitButton)
-        exitButton.snp.makeConstraints { make in
+        view.addSubview(closeButton)
+        closeButton.snp.makeConstraints { make in
             make.size.equalTo(heightS)
             make.centerY.equalTo(scoreLabel)
             make.leading.equalToSuperview().offset(insetFromScreenEdges)
@@ -252,7 +252,7 @@ extension GameViewController {
             enemies.forEach { enemy in
                 guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
                 
-                if objectFramesDidIntersected(planeFrame, and: enemyFrame) {
+                if objectsFramesDidIntersected(planeFrame, and: enemyFrame) {
                     stopGame()
                     print("game over")
                     present(gameOverAlert, animated: true)
@@ -267,7 +267,7 @@ extension GameViewController {
                 enemies.forEach { enemy in
                     guard let enemyFrame = enemy.layer.presentation()?.frame else { return }
                     
-                    if objectFramesDidIntersected(enemyFrame, and: bulletFrame) {
+                    if objectsFramesDidIntersected(enemyFrame, and: bulletFrame) {
                         print("enemy terminated")
                         score += 1
                         enemy.removeFromSuperview()
@@ -278,7 +278,7 @@ extension GameViewController {
         }
     }
     
-    func objectFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
+    func objectsFramesDidIntersected(_ firstObjectFrame: CGRect, and secondObjectFrame: CGRect) -> Bool {
         firstObjectFrame.intersects(secondObjectFrame)
     }
     
@@ -335,10 +335,14 @@ extension GameViewController {
     }
     
     @objc func exitGame() {
-        stopGame()
-        saveGameResults()
         UIView.setAnimationsEnabled(true)
         dismiss(animated: true)
+    }
+    
+    @objc func closeGame() {
+        stopGame()
+        saveGameResults()
+        present(gameOverAlert, animated: true)
     }
     
     @objc func restartGame() {

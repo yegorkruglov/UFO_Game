@@ -22,7 +22,7 @@ extension UIViewController {
     var gameFont: UIFont { UIFont.systemFont(ofSize: heightXS, weight: .bold) }
     
     func getButton(selector: Selector, title: String? = nil, imageName: String? = nil) -> UIButton {
-        let button = UIButton(type: .roundedRect)
+        let button = UIButton()
         button.layer.cornerRadius = cornerRadiusM
         button.titleLabel?.font = gameFont
         button.backgroundColor = .white
