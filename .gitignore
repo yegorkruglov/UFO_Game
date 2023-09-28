@@ -1,0 +1,66 @@
+Pods/Manifest.lock
+Pods/Pods.xcodeproj/project.pbxproj
+Pods/Pods.xcodeproj/xcuserdata/egorkruglov.xcuserdatad/xcschemes/Pods-UFO_Game.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/egorkruglov.xcuserdatad/xcschemes/SnapKit.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/egorkruglov.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/SnapKit/LICENSE
+Pods/SnapKit/README.md
+Pods/SnapKit/Sources/Constraint.swift
+Pods/SnapKit/Sources/ConstraintAttributes.swift
+Pods/SnapKit/Sources/ConstraintConfig.swift
+Pods/SnapKit/Sources/ConstraintConstantTarget.swift
+Pods/SnapKit/Sources/ConstraintDescription.swift
+Pods/SnapKit/Sources/ConstraintDirectionalInsets.swift
+Pods/SnapKit/Sources/ConstraintDirectionalInsetTarget.swift
+Pods/SnapKit/Sources/ConstraintDSL.swift
+Pods/SnapKit/Sources/ConstraintInsets.swift
+Pods/SnapKit/Sources/ConstraintInsetTarget.swift
+Pods/SnapKit/Sources/ConstraintItem.swift
+Pods/SnapKit/Sources/ConstraintLayoutGuide+Extensions.swift
+Pods/SnapKit/Sources/ConstraintLayoutGuide.swift
+Pods/SnapKit/Sources/ConstraintLayoutGuideDSL.swift
+Pods/SnapKit/Sources/ConstraintLayoutSupport.swift
+Pods/SnapKit/Sources/ConstraintLayoutSupportDSL.swift
+Pods/SnapKit/Sources/ConstraintMaker.swift
+Pods/SnapKit/Sources/ConstraintMakerEditable.swift
+Pods/SnapKit/Sources/ConstraintMakerExtendable.swift
+Pods/SnapKit/Sources/ConstraintMakerFinalizable.swift
+Pods/SnapKit/Sources/ConstraintMakerPrioritizable.swift
+Pods/SnapKit/Sources/ConstraintMakerRelatable+Extensions.swift
+Pods/SnapKit/Sources/ConstraintMakerRelatable.swift
+Pods/SnapKit/Sources/ConstraintMultiplierTarget.swift
+Pods/SnapKit/Sources/ConstraintOffsetTarget.swift
+Pods/SnapKit/Sources/ConstraintPriority.swift
+Pods/SnapKit/Sources/ConstraintPriorityTarget.swift
+Pods/SnapKit/Sources/ConstraintRelatableTarget.swift
+Pods/SnapKit/Sources/ConstraintRelation.swift
+Pods/SnapKit/Sources/ConstraintView+Extensions.swift
+Pods/SnapKit/Sources/ConstraintView.swift
+Pods/SnapKit/Sources/ConstraintViewDSL.swift
+Pods/SnapKit/Sources/Debugging.swift
+Pods/SnapKit/Sources/LayoutConstraint.swift
+Pods/SnapKit/Sources/LayoutConstraintItem.swift
+Pods/SnapKit/Sources/Typealiases.swift
+Pods/SnapKit/Sources/UILayoutSupport+Extensions.swift
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-acknowledgements.markdown
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-acknowledgements.plist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-dummy.m
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-Debug-input-files.xcfilelist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-Debug-output-files.xcfilelist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-Release-input-files.xcfilelist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks-Release-output-files.xcfilelist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-frameworks.sh
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-Info.plist
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game-umbrella.h
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game.debug.xcconfig
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game.modulemap
+Pods/Target Support Files/Pods-UFO_Game/Pods-UFO_Game.release.xcconfig
+Pods/Target Support Files/SnapKit/SnapKit-dummy.m
+Pods/Target Support Files/SnapKit/SnapKit-Info.plist
+Pods/Target Support Files/SnapKit/SnapKit-prefix.pch
+Pods/Target Support Files/SnapKit/SnapKit-umbrella.h
+Pods/Target Support Files/SnapKit/SnapKit.debug.xcconfig
+Pods/Target Support Files/SnapKit/SnapKit.modulemap
+Pods/Target Support Files/SnapKit/SnapKit.release.xcconfig
+UFO_Game.xcodeproj/xcshareddata/xcschemes/UFO_Game.xcscheme
+UFO_Game.xcworkspace/xcuserdata/egorkruglov.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
