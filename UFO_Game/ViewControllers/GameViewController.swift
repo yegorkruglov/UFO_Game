@@ -255,6 +255,7 @@ private extension GameViewController {
                 if objectsFramesDidIntersected(planeFrame, and: enemyFrame) {
                     stopGame()
                     print("game over")
+                    saveGameResults()
                     present(gameOverAlert, animated: true)
                 }
             }
